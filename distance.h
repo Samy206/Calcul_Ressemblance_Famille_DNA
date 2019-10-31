@@ -24,6 +24,8 @@
 							
 							void push_liste(LISTE *l , float distance , int a , int b);
 							
+							void ecrire_fichier(LISTE *l , char * argv);
+							
 							void afficher_liste(LISTE *l);
 							
 							#endif

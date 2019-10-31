@@ -6,26 +6,26 @@
 							
 							int main(int argc , char **argv)
 							{
+								float distance ;
 								LISTE *l = initialiser_liste();
-								for(int i = 1 ; i <= 20 ; i++)
+								for(int i = 20 ; i >= 1 ; i--)
 								{
 									SEQUENCE *A = initialiser_sequence(argv[i]);
-									for(int j = 1 ; j <= 20 ; j++)
+									for(int j = 20 ; j >= 1 ; j--)
 									{
 										if(i != j)
 										{
-											SEQUENCE *B = initialiser_sequence(argv[j]);
-											printf("seq%d : %s\n",get_indice(argv[i]),A->s);
-											printf("seq%d : %s\n",get_indice(argv[j]),B->s);
-											push_liste(l,distance_sequence_avec_insertions(A,B),get_indice(argv[i]),get_indice(argv[j]));
-											afficher_liste(l);
-											liberer_seq(B);
+												SEQUENCE *B = initialiser_sequence(argv[j]);
+												distance = distance_sequence_avec_insertions(A,B);
+												push_liste(l,distance,get_indice(argv[i]),get_indice(argv[j]));
+												liberer_seq(B);	
 										}
-										else 
-											;
 									}
 									liberer_seq(A);
 								}
+								
+								ecrire_fichier(l,argv[21]);
+								printf("l->nombre : %d\n",l->nombre);
 								
 								exit(0);
 							}

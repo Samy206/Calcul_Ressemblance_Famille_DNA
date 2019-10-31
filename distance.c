@@ -8,21 +8,21 @@
 									LISTE * initialiser_liste()
 									{
 										LISTE * l = malloc(sizeof(LISTE*));
-										DISTANCE *d = malloc(sizeof(DISTANCE*));
+										DISTANCE *d = malloc(sizeof(DISTANCE));
 										if(l == NULL || d == NULL)
 										{
 											printf("Pas assez de mémoire pour l ou d \n");
 											exit(2);
 										}
 										l->nombre = 1 ;
-										printf("before premier %p\n", l);
+										//printf("before premier %p\n", l);
 										d->val = 0.0 ;
 										d->indiced = 0 ;
 										d->indiceg = 0 ;
 										d->suiv = NULL ;
 										l->premier = d ;
 										
-										printf("la liste est créee %p\n",l);
+										//printf("la liste est créee %p\n",l);
 										return l ;
 									}
 									
@@ -34,7 +34,7 @@
 										char s[2];
 										s[0] = argv[3];
 										s[1] = argv[4];
-										i = strtol(s,&c,0);
+										i = strtol(s,&c,10);
 										return i ;
 									}
 									
@@ -55,26 +55,50 @@
 										
 										else
 										{
-											DISTANCE *d = malloc(sizeof(DISTANCE*));
+											DISTANCE *d = malloc(sizeof(DISTANCE));
 											if(d == NULL)
 											{
 												printf("la distance n'a pas été créée\n");
 												exit(7);
 											}
 											d->val = distance ;
-											d->indiced = b;
 											d->indiceg = a;
+											d->indiced = b;
 											d->suiv = l->premier ;
 											l->premier = d ;
 											(l->nombre)++ ;
 										}
 									}
 									
+									void ecrire_fichier(LISTE *l , char * argv )
+									{
+										FILE *F = fopen(argv,"w");
+										if(F == NULL)
+										{
+											printf("problème d'ouverture de fichier ecriture\n");
+											exit(3);
+										}
+										
+										DISTANCE *d = l->premier ;
+										fprintf(F,"La liste de distance est [ \n");
+										
+										while( d != NULL)
+										{
+											fprintf(F,"la distance entre les séquences numéro %2d et numéro %2d est est %f\n",d->indiceg,d->indiced,d->val);
+											d = d->suiv ;
+										}
+										fprintf(F,"]\n");
+										fprintf(F,"il y a %d éléments.\n",l->nombre);
+										fclose(F);	
+									}	
+									
+									
 									void afficher_liste(LISTE *l)
 									{
 										DISTANCE *d ;
 										d = l->premier ;
-										printf("la liste de distance  est [\n");
+										printf("la liste de distance  est \n");
+										printf("[ \n");
 										while(d != NULL)
 										{
 											printf("distance entre les séquences %d et %d : %f \n",d->indiceg,d->indiced,d->val);

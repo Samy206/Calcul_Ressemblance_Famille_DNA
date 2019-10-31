@@ -9,7 +9,6 @@
 					int get_taille_seq(char *argv)
 					{
 						int t = 0 ;
-						printf("orange \n");
 						FILE *F ;
 						F = fopen(argv,"r");
 						if(F == NULL)
@@ -17,20 +16,17 @@
 							printf("Problème d'ouverture fichier %s\n",argv);
 							exit(1);
 						}
-						printf("clémentine\n");
 						while(fgetc(F) != EOF)
 						{
 							t++;
 						}
 						rewind(F);
-						fclose(F);
+						fclose(F);;
 						return t ;
 					}
 					
-					
 					char * lire_fichier(char *argv)
 					{
-						printf("Before ouverture\n");
 						FILE *F ;
 						F = fopen(argv,"r");
 						if(F == NULL)
@@ -38,22 +34,18 @@
 							printf("Problème d'ouverture fichier %s\n",argv);
 							exit(1);
 						}
-						printf("After ouverture\n");
 						int t = get_taille_seq(argv);
 						char *s ;
 						s = malloc(t);
 						fscanf(F,"%s",s); 			 //enregistrement de la séquence
-						fclose(F);  					//fermeture du fichier 
-	 					
-						return s ;
+						fclose(F);
+						return s;
 					}
 					
 					SEQUENCE * initialiser_sequence ( char * argv1)
 					{
-						SEQUENCE *A = malloc(sizeof(SEQUENCE*));
-						printf("Pomme\n");
+						SEQUENCE *A = calloc(1,sizeof(SEQUENCE*));
 						A->taille = get_taille_seq(argv1) ;
-						A->s = malloc(A->taille*(sizeof(char)));
 						A->s = lire_fichier(argv1);
 						return A ;
 					}
@@ -305,12 +297,10 @@
 						if(A->taille > B->taille)
 						{
 							difference = A->taille - B->taille ;
-							printf("seq1>seq2 et la difference est : %d \n",difference);
 						}
 						if(A->taille < B->taille)
 						{
 							difference = B->taille - A->taille ;
-							printf("seq2>seq1 et la difference est : %d \n",difference);
 						}
 						
 						if(A->taille == B->taille)
@@ -463,7 +453,6 @@
 								
 								
 						}	
-						printf("distance avec insertions : %f\n",distance);
 						return distance ;
 					}
 					
@@ -471,7 +460,6 @@
 					{
 						free(A->s);
 						free(A);
-					
 					}
 							
 						
