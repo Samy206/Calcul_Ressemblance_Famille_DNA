@@ -22,7 +22,7 @@
 							
 							int get_indice(char *argv);
 							
-							void push_liste(LISTE *l , SEQUENCE *A , SEQUENCE *B, char * argv1 ,char *argv2);
+							void push_liste(LISTE *l , float distance , int a , int b);
 							
 							void afficher_liste(LISTE *l);
 							

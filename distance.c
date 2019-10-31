@@ -14,13 +14,15 @@
 											printf("Pas assez de mémoire pour l ou d \n");
 											exit(2);
 										}
-										
+										l->nombre = 1 ;
+										printf("before premier %p\n", l);
 										d->val = 0.0 ;
 										d->indiced = 0 ;
 										d->indiceg = 0 ;
 										d->suiv = NULL ;
 										l->premier = d ;
-										l->nombre = 1 ;
+										
+										printf("la liste est créee %p\n",l);
 										return l ;
 									}
 									
@@ -36,7 +38,7 @@
 										return i ;
 									}
 									
-									void push_liste(LISTE *l , SEQUENCE *A , SEQUENCE *B, char * argv1 ,char *argv2)
+									void push_liste(LISTE *l , float distance , int a , int b)
 									{
 										if(l == NULL )
 										{
@@ -46,10 +48,9 @@
 										
 										if(l->premier->indiced == 0 && l->premier->indiceg == 0)
 										{
-											l->premier->val = distance_sequence_avec_insertions(A,B);
-											l->premier->indiceg = get_indice(argv1);
-											l->premier->indiced = get_indice(argv2);
-											printf("test \n");
+											l->premier->val = distance ;
+											l->premier->indiceg = a;
+											l->premier->indiced = b;
 										}
 										
 										else
@@ -57,12 +58,12 @@
 											DISTANCE *d = malloc(sizeof(DISTANCE*));
 											if(d == NULL)
 											{
-												printf("la distance n'a pas été crée\n");
+												printf("la distance n'a pas été créée\n");
 												exit(7);
 											}
-											d->val = distance_sequence_avec_insertions(A,B);
-											d->indiced = get_indice(argv1);
-											d->indiceg = get_indice(argv2);
+											d->val = distance ;
+											d->indiced = b;
+											d->indiceg = a;
 											d->suiv = l->premier ;
 											l->premier = d ;
 											(l->nombre)++ ;
@@ -76,10 +77,10 @@
 										printf("la liste de distance  est [\n");
 										while(d != NULL)
 										{
-											printf("distance entre les séquences %d et %d : %f \n",d->indiceg,d->indiceg,d->val);
+											printf("distance entre les séquences %d et %d : %f \n",d->indiceg,d->indiced,d->val);
 											d = d->suiv ;
 										}
-										printf("]");
+										printf("]\n");
 									}
 										
 									

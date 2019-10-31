@@ -9,12 +9,16 @@
 								
 								typedef struct sequence SEQUENCE;
 								
-								SEQUENCE * lire_fichier( char *argv);								
+								int get_taille_seq(char *argv);
+								
+								char * lire_fichier( char *argv);								
 								
 								SEQUENCE * initialiser_sequence(char *argv1 );
 								
 								float distance_sequence_sans_insertions( SEQUENCE * A, SEQUENCE * B);
 								
 								float distance_sequence_avec_insertions( SEQUENCE * A, SEQUENCE * B);
+								
+								void liberer_seq(SEQUENCE *A);
 								
 								#endif

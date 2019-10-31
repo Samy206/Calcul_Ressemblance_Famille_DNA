@@ -4,47 +4,65 @@
 					#include "sequence.h"
 					#include "distance.h"
 					
-					SEQUENCE * lire_fichier( char *argv)
+					
+					
+					int get_taille_seq(char *argv)
 					{
 						int t = 0 ;
-						FILE *F = fopen(argv,"r");
+						printf("orange \n");
+						FILE *F ;
+						F = fopen(argv,"r");
 						if(F == NULL)
 						{
 							printf("Problème d'ouverture fichier %s\n",argv);
 							exit(1);
 						}
-						SEQUENCE *tmp = malloc(sizeof(SEQUENCE*));
-						if(tmp == NULL)
-						{
-							printf("Problème d'allocation de mémoire de séquence A");
-							exit(2);
-						}
-						
+						printf("clémentine\n");
 						while(fgetc(F) != EOF)
-					    {
-							t++; 						// nombre de caractères de la séquence
+						{
+							t++;
 						}
 						rewind(F);
-						tmp->taille = t ;					 // taille de la séquence
-						tmp->s = malloc(t*sizeof(char)) ;
-						fscanf(F,"%s",tmp->s); 			 //enregistrement de la séquence
-						fclose(F);  					//fermeture du fichier 
-	 					
-						return tmp ;
+						fclose(F);
+						return t ;
 					}
 					
-					SEQUENCE * initialiser_sequence(char *argv1 )
+					
+					char * lire_fichier(char *argv)
 					{
-						SEQUENCE * A = lire_fichier(argv1);
+						printf("Before ouverture\n");
+						FILE *F ;
+						F = fopen(argv,"r");
+						if(F == NULL)
+						{
+							printf("Problème d'ouverture fichier %s\n",argv);
+							exit(1);
+						}
+						printf("After ouverture\n");
+						int t = get_taille_seq(argv);
+						char *s ;
+						s = malloc(t);
+						fscanf(F,"%s",s); 			 //enregistrement de la séquence
+						fclose(F);  					//fermeture du fichier 
+	 					
+						return s ;
+					}
+					
+					SEQUENCE * initialiser_sequence ( char * argv1)
+					{
+						SEQUENCE *A = malloc(sizeof(SEQUENCE*));
+						printf("Pomme\n");
+						A->taille = get_taille_seq(argv1) ;
+						A->s = malloc(A->taille*(sizeof(char)));
+						A->s = lire_fichier(argv1);
 						return A ;
 					}
+
 					
 					float distance_sequence_sans_insertions( SEQUENCE * A, SEQUENCE * B)
 					{
 						float distance = 0.0 ;
 						int i = 0;
-					//	printf("A : taille : %d , contenu : %s\n",A->taille,A->s);
-						//printf("B : taille : %d , contenu : %s\n",B->taille,B->s);
 						
 						if(A->taille > B->taille)  //la première séquence est plus longue que la deuxième
 						{
@@ -283,19 +301,16 @@
 						float distance = distance_sequence_sans_insertions(A,B); 
 						float distance_min = 0.0 ;
 						
-						printf("A : taille : %d , contenu : %s\n",A->taille,A->s);
-						printf("B : taille : %d , contenu : %s\n",B->taille,B->s);
-						
 						int difference ;
 						if(A->taille > B->taille)
 						{
 							difference = A->taille - B->taille ;
-							printf("A>B et la difference est : %d \n",difference);
+							printf("seq1>seq2 et la difference est : %d \n",difference);
 						}
 						if(A->taille < B->taille)
 						{
 							difference = B->taille - A->taille ;
-							printf("B>A et la difference est : %d \n",difference);
+							printf("seq2>seq1 et la difference est : %d \n",difference);
 						}
 						
 						if(A->taille == B->taille)
@@ -452,5 +467,11 @@
 						return distance ;
 					}
 					
-						
+					void liberer_seq(SEQUENCE *A)
+					{
+						free(A->s);
+						free(A);
+					
+					}
+							
 						

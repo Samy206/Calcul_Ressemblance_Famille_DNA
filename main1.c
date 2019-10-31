@@ -4,15 +4,28 @@
 							#include "sequence.h"
 							#include "distance.h"
 							
-							int main( int argc , char **argv)
+							int main(int argc , char **argv)
 							{
-								SEQUENCE *A = initialiser_sequence(argv[1]);
-								SEQUENCE *B = initialiser_sequence(argv[2]);
-								
 								LISTE *l = initialiser_liste();
-								
-								push_liste(l,A,B,argv[1],argv[2]); 
-								//afficher_liste(l);
+								for(int i = 1 ; i <= 20 ; i++)
+								{
+									SEQUENCE *A = initialiser_sequence(argv[i]);
+									for(int j = 1 ; j <= 20 ; j++)
+									{
+										if(i != j)
+										{
+											SEQUENCE *B = initialiser_sequence(argv[j]);
+											printf("seq%d : %s\n",get_indice(argv[i]),A->s);
+											printf("seq%d : %s\n",get_indice(argv[j]),B->s);
+											push_liste(l,distance_sequence_avec_insertions(A,B),get_indice(argv[i]),get_indice(argv[j]));
+											afficher_liste(l);
+											liberer_seq(B);
+										}
+										else 
+											;
+									}
+									liberer_seq(A);
+								}
 								
 								exit(0);
 							}
