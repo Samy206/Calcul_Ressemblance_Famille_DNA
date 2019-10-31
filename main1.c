@@ -24,8 +24,9 @@
 									liberer_seq(A);
 								}
 								
-								ecrire_fichier(l,argv[21]);
-								printf("l->nombre : %d\n",l->nombre);
+								ecrire_fichier_fin(l,argv[21]);
+								float min = recherche_min_distance(l);
+								printf("distance min : %f\n",min);
 								
 								exit(0);
 							}

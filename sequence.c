@@ -288,6 +288,7 @@
 						return distance ;
 					}
 					
+					
 					float distance_sequence_avec_insertions(SEQUENCE * A , SEQUENCE * B )
 					{
 						float distance = distance_sequence_sans_insertions(A,B); 

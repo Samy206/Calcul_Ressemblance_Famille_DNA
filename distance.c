@@ -70,7 +70,7 @@
 										}
 									}
 									
-									void ecrire_fichier(LISTE *l , char * argv )
+									void ecrire_fichier_fin(LISTE *l , char * argv )
 									{
 										FILE *F = fopen(argv,"w");
 										if(F == NULL)
@@ -105,6 +105,22 @@
 											d = d->suiv ;
 										}
 										printf("]\n");
+									}
+									
+									float recherche_min_distance(LISTE *l)
+									{
+										DISTANCE *d = l->premier ;
+										float min = d->val ;
+										while(d != NULL)
+										{
+											if(min > (d->val) )
+											{
+												min = d->val ;
+											}
+											
+											d = d->suiv ;
+										}
+										return min ;
 									}
 										
 									

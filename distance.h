@@ -24,9 +24,11 @@
 							
 							void push_liste(LISTE *l , float distance , int a , int b);
 							
-							void ecrire_fichier(LISTE *l , char * argv);
+							void ecrire_fichier_fin(LISTE *l , char * argv);
 							
 							void afficher_liste(LISTE *l);
+							
+							float recherche_min_distance(LISTE *l);
 							
 							#endif
 							
