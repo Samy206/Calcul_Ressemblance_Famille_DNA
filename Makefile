@@ -1,11 +1,15 @@
-run1 : partie1
-	./partie1 seq01.txt seq02.txt seq03.txt seq04.txt seq05.txt seq06.txt seq07.txt seq08.txt seq09.txt seq10.txt seq11.txt seq12.txt seq13.txt seq14.txt seq15.txt seq16.txt seq17.txt seq18.txt seq19.txt seq20.txt distance_sequences
+run2 : partie2 
+	./partie2 sequences/seq01.txt sequences/seq02.txt  sequences/seq03.txt sequences/seq04.txt sequences/seq05.txt sequences/seq06.txt sequences/seq07.txt sequences/seq08.txt sequences/seq09.txt sequences/seq10.txt sequences/seq11.txt sequences/seq12.txt sequences/seq13.txt sequences/seq14.txt sequences/seq15.txt sequences/seq16.txt sequences/seq17.txt sequences/seq18.txt  sequences/seq19.txt  sequences/seq20.txt distance_sequences_a_modif famille
 	
-partie1 : main1.o sequence.o distance.o 
-	gcc -Wall -Wextra main1.o sequence.o distance.o -o partie1 -g
 
-main1.o : main1.c 
-	gcc -Wall -c main1.c -g
+partie2 :main2.o sequence.o distance.o famille.o
+	gcc -Wall -Wextra main2.o sequence.o distance.o famille.o -o partie2 -g
+
+main2.o : main2.c
+	gcc -Wall -c main2.c -g
+
+famille.o : famille.c
+	gcc -Wall -c famille.c -g
 
 sequence.o : sequence.c
 	gcc -Wall -c sequence.c -g
@@ -15,6 +19,6 @@ distance.o : distance.c
 
 clean : 
 	rm -f *.o
-	rm partie1
-	ls -l
+	rm partie2
+	ls 
 	

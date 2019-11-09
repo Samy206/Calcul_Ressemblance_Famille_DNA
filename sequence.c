@@ -21,7 +21,7 @@
 							t++;
 						}
 						rewind(F);
-						fclose(F);;
+						fclose(F);
 						return t ;
 					}
 					
@@ -44,7 +44,7 @@
 					
 					SEQUENCE * initialiser_sequence ( char * argv1)
 					{
-						SEQUENCE *A = calloc(1,sizeof(SEQUENCE*));
+						SEQUENCE *A = malloc(sizeof(SEQUENCE*));
 						A->taille = get_taille_seq(argv1) ;
 						A->s = lire_fichier(argv1);
 						return A ;
@@ -293,15 +293,17 @@
 					{
 						float distance = distance_sequence_sans_insertions(A,B); 
 						float distance_min = 0.0 ;
-						
+						char *s ;
 						int difference ;
 						if(A->taille > B->taille)
 						{
 							difference = A->taille - B->taille ;
+							s = malloc(sizeof(A->taille));
 						}
 						if(A->taille < B->taille)
 						{
 							difference = B->taille - A->taille ;
+							s = malloc(sizeof(B->taille));
 						}
 						
 						if(A->taille == B->taille)
@@ -323,6 +325,7 @@
 								if(distance_min < distance)
 								{
 									distance = distance_min ;
+									s = B->s ;
 								}
 								
 								for(int k = 0 ; k < B->taille ; k++)
@@ -333,6 +336,7 @@
 									if(distance_min < distance)
 									{
 										distance = distance_min ;
+										s = B->s ;
 									}
 								}
 							}
@@ -355,6 +359,7 @@
 									if(distance_min < distance)
 									{
 										distance = distance_min;
+										s = B->s ;
 									}
 									
 									for(int l = (B->taille) ; l > ((B->taille/2)+1) ; l--)
@@ -365,6 +370,7 @@
 										if(distance_min < distance)
 										{
 											distance = distance_min;
+											s = B->s ;
 										}
 									}
 									B->s[k] = B->s[k+1] ;
@@ -377,9 +383,8 @@
 									}
 								}
 										
-								}
-								
-								
+								}	
+								B->s = s ;
 						}						
 						
 						if(A->taille < B->taille)
@@ -396,6 +401,7 @@
 								if(distance_min < distance)
 								{
 									distance = distance_min ;
+									s = A->s ;
 								}
 								
 								for(int k = 0 ; k < A->taille ; k++)
@@ -406,6 +412,7 @@
 									if(distance_min < distance)
 									{
 										distance = distance_min ;
+										s = A->s ;
 									}
 								}
 							}
@@ -428,6 +435,7 @@
 									if(distance_min < distance)
 									{
 										distance = distance_min;
+										s = A->s ;
 									}
 									
 									for(int l = (A->taille) ; l > ((A->taille/2)+1) ; l--)
@@ -438,6 +446,7 @@
 										if(distance_min < distance)
 										{
 											distance = distance_min;
+											s = A->s ;
 										}
 									}
 									A->s[k] = A->s[k+1] ;
@@ -449,10 +458,9 @@
 										A->s[m+1] = '-' ;
 									}
 								}
-										
-								}
 								
-								
+							}
+							A->s = s ;
 						}	
 						return distance ;
 					}

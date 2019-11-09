@@ -1,0 +1,102 @@
+									#include <stdio.h>
+									#include <stdlib.h>
+									#include <unistd.h>
+									#include <string.h>
+									#include "sequence.h"
+									#include "distance.h"
+									
+									float recherche_distance_min(LISTE *l)
+									{
+										DISTANCE *d = l->premier ;
+										float min = l->premier->val ;
+										while(d != NULL)
+										{
+											if(min > d->val)
+											{
+												min = d->val;
+											}
+											d = d->suiv ;
+										}
+										return min ;
+									}
+									
+									int get_num_freq_max(LISTE *l , float distance , char **argv)
+									{
+										float f = 0 ;
+										int cmp = 0 ;
+										int max = 0 ;
+										int numero ;
+										for(int i = 20 ; i >= 1 ; i--)
+										{
+											SEQUENCE *A = initialiser_sequence(argv[i]);
+											for(int j = 20 ; j >= 1 ; j--)
+											{
+												if(i != j)
+												{
+													SEQUENCE *B = initialiser_sequence(argv[j]);
+													f=distance_sequence_avec_insertions(A,B);
+													if(f == distance)
+													{
+														cmp++;
+													}
+													liberer_seq(B);
+												}
+											}
+											liberer_seq(A);
+											if(cmp > max )
+											{
+												max = cmp ;
+												numero = i;
+											}
+											cmp = 0 ;
+										}
+										return numero ;
+									}
+									
+									LISTE * creer_liste_initiale(char **argv)
+									{
+										float distance ;
+										LISTE *l = initialiser_liste();
+										for(int i = 20 ; i >= 1 ; i--)
+										{
+										SEQUENCE *A = initialiser_sequence(argv[i]);
+											for(int j = 20 ; j >= 1 ; j--)
+											{
+												if(i != j)
+												{
+													SEQUENCE *B = initialiser_sequence(argv[j]);
+													distance = distance_sequence_avec_insertions(A,B);
+													push_liste(l,distance,get_indice(argv[i]),get_indice(argv[j]));
+													liberer_seq(B);	
+												}
+											}
+											liberer_seq(A);
+										}
+	
+										ecrire_fichier_fin(l,argv[21]);
+										
+										return l ;
+									}
+									
+									int créer_famille(LISTE *l , int numero , float distance , char **argv)
+									{
+										int cmp ; 
+										float d ;
+										LISTE *l = initialiser_liste();
+										cmp = 0 ;
+										SEQUENCE * A = initialiser_sequence(argv[numero]);
+										for(int i = 20 ; i >= 1 ; i--)
+										{
+											SEQUENCE *B = initialiser_sequence(argv[i]);
+											d = distance_sequence_avec_insertions(A,B);
+											if( d == distance )
+											{
+												push_liste(l,d,numero,get_indice(argv[i]);
+											}
+											liberer_seq(B);
+										}
+										liberer_seq(A);
+										ajouter_fichier_fin(l,argv[22]);
+									}
+											
+									
