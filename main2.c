@@ -7,33 +7,20 @@
 									
 									int main(int argc , char ** argv)
 									{
-										int T[10];
-										int taille ;
+										SEQUENCE D[20] ;
+										initialiser_tab_seq(D,argv);
 										
-										LISTE *l = creer_liste_initiale(argv);
-										
-										float d = recherche_distance_min(l);
-										printf("distance_min : %f\n",d);
-										
-										int numero = get_num_freq_max(d,argv);
-										printf("numero : %d\n",numero);
-										
-										 taille = get_num_autre(T,numero,d,argv);
-										
-										for(int i = 0 ; i < taille ; i++)
+										for ( int i = 0 ; i < 20 ; i++)
 										{
-											printf("T[%d] : %d\n",i,T[i]);
+											printf("D[%2d] : %s , taille : %d\n",i,D[i].s,D[i].taille);
 										}
-										
-										
-										supp_numero_seq(l,numero);
-										
-										for(int j = 0 ; j < taille ; j++)
+										/*LISTE *l =creer_liste_initiale(D,argv);
+										for ( int i = 0 ; i < 20 ; i++)
 										{
-											supp_numero_seq(l,T[j]);
-										}
-										
-										ecrire_fichier_liste_fin(l,argv[21]);
+											printf("D[%2d] : %s , taille : %d\n",i,D[i].s,D[i].taille);
+										}*/
+										float dist = distance_sequence_avec_insertions(&D[0],&D[4]);
+										printf("dist : %f\n",dist);
 										
 										exit(0);
 									}

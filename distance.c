@@ -48,7 +48,6 @@
 										s[0] = argv[13];
 										s[1] = argv[14];
 										i = strtol(s,&c,10);
-										printf("indice i : %d\n",i);
 										return i ;
 									}
 									
@@ -66,7 +65,7 @@
 									}
 																	
 									
-									void push_liste(LISTE *l , float distance , int a , int b)
+									void push_liste(LISTE *l , int val , int a , int b)
 									{
 										if(l == NULL )
 										{
@@ -76,7 +75,7 @@
 										
 										if(l->premier->indiced == 0 && l->premier->indiceg == 0)
 										{
-											l->premier->val = distance;
+											l->premier->val = val;
 											l->premier->indiceg = a;
 											l->premier->indiced = b;
 										}
@@ -89,7 +88,7 @@
 												printf("la distance n'a pas été créée\n");
 												exit(7);
 											}
-											d->val = distance ;
+											d->val = val;
 											d->indiceg = a;
 											d->indiced = b;
 											d->suiv = l->premier ;

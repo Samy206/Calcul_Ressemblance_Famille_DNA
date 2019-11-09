@@ -28,21 +28,21 @@
 										int numero ;
 										for(int i = 20 ; i >= 1 ; i--)
 										{
-											SEQUENCE *A = initialiser_sequence(argv[i]);
+											SEQUENCE A = initialiser_sequence(argv[i]);
 											for(int j = 20 ; j >= 1 ; j--)
 											{
 												if(i != j)
 												{
-													SEQUENCE *B = initialiser_sequence(argv[j]);
-													f=distance_sequence_avec_insertions(A,B);
+													SEQUENCE B = initialiser_sequence(argv[j]);
+													f=distance_sequence_avec_insertions(&A,&B);
 													if(f == distance)
 													{
 														cmp++;
 													}
-													liberer_seq(B);
+													liberer_seq(&B);
 												}
 											}
-											liberer_seq(A);
+											liberer_seq(&A);
 											if(cmp > max )
 											{
 												max = cmp ;
@@ -53,24 +53,20 @@
 										return numero ;
 									}
 									
-									LISTE * creer_liste_initiale(char **argv )
+									LISTE * creer_liste_initiale(SEQUENCE D[] , char ** argv)
 									{
 										float d ;
 										LISTE *l = initialiser_liste();
-										for(int i = 20 ; i >= 1 ; i--)
+										for(int i = 19 ; i >= 0 ; i--)
 										{
-											SEQUENCE *A = initialiser_sequence(argv[i]);
-											for(int j = 20 ; j >= 1 ; j--)
+											for(int j = 19 ; j >= 0 ; j--)
 											{
-												if(i != j)
+												if( i != j)
 												{
-													SEQUENCE *B = initialiser_sequence(argv[j]);
-													d = distance_sequence_avec_insertions(A,B);
-													push_liste(l,d,get_indice(argv[i]),get_indice(argv[j]));
-													liberer_seq(B);	
+													d = distance_sequence_avec_insertions(&D[i],&D[j]);
+													push_liste(l,d,get_indice(argv[i])+1,get_indice(argv[j])+1);
 												}
 											}
-											liberer_seq(A);
 										}
 										ecrire_fichier_liste_fin(l,argv[21]);
 										
@@ -81,40 +77,40 @@
 									{
 										float d ;
 										int taille = 0 ;
-										SEQUENCE *A = initialiser_sequence(argv[numero]);
+										SEQUENCE A = initialiser_sequence(argv[numero]);
 										for(int j = 20 ; j >= 1 ; j--)
 										{
 											if(numero != j)
 											{
-												SEQUENCE *B = initialiser_sequence(argv[j]);
-												d = distance_sequence_avec_insertions(A,B);
+												SEQUENCE B = initialiser_sequence(argv[j]);
+												d = distance_sequence_avec_insertions(&A,&B);
 												if( d == distance )
 												{
 													taille++;
 												}
-												liberer_seq(B);	
+												liberer_seq(&B);	
 											}
 										}
-										liberer_seq(A);
+										liberer_seq(&A);
 										taille = 0 ;
-										SEQUENCE *C = initialiser_sequence(argv[numero]);
+										SEQUENCE C = initialiser_sequence(argv[numero]);
 										for(int j = 20 ; j >= 1 ; j--)
 										{
 											if(numero != j)
 											{
-												SEQUENCE *B = initialiser_sequence(argv[j]);
-												d = distance_sequence_avec_insertions(C,B);
+												SEQUENCE B = initialiser_sequence(argv[j]);
+												d = distance_sequence_avec_insertions(&C,&B);
 												if( d == distance )
 												{
 													T[taille] = j ;
 													taille++ ;
 												}
-												liberer_seq(B);	
+												liberer_seq(&B);	
 											}
 										}
-										liberer_seq(A);
+										liberer_seq(&A);
 										return taille ;
 									}
 									
-											
+
 									
