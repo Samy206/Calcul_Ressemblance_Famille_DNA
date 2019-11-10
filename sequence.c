@@ -36,18 +36,7 @@
 										}
 										int t = get_taille_seq(argv);
 										char *s ;
-										if(t == 17 )
-										{
-											s = malloc(t+2);
-										}
-										if(t == 18 )
-										{
-											s = malloc(t+1);
-										}
-										else if(t == 19 )
-										{
-											s = malloc(t);
-										}
+										s = malloc(t);
 										fscanf(F,"%s",s); 			 //enregistrement de la séquence
 										fclose(F);
 										return s;
@@ -56,7 +45,7 @@
 									SEQUENCE initialiser_sequence ( char * argv1)
 									{
 										SEQUENCE A ;
-										A.taille = get_taille_seq(argv1) ;
+										A.taille = get_taille_seq(argv1) ;										
 										A.s = lire_fichier(argv1);
 										return A ;
 									}
@@ -71,75 +60,75 @@
 										}
 									}
 									
-									
-									float distance_sequence_sans_insertions( SEQUENCE  * A, SEQUENCE * B)
+								
+									float distance_sequence_sans_insertions( SEQUENCE   A, SEQUENCE B)
 									{
 										float distance = 0.0 ;
 										int i = 0;
 										
-										if(A->taille > B->taille)  //la première séquence est plus longue que la deuxième
+										if(A.taille > B.taille)  //la première séquence est plus longue que la deuxième
 										{
-											 while( i < (B->taille))
+											 while( i < (B.taille))
 											 {
-												 if(A->s[i] != B->s[i] )
+												 if(A.s[i] != B.s[i] )
 												 {			
-													 if(A->s[i] == 'A')
+													 if(A.s[i] == 'A')
 													 {
-														 if(B->s[i] == 'C')
+														 if(B.s[i] == 'C')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == 'G')
+														 else if(B.s[i] == 'G')
 															distance = distance + 1.0 ;
-														 else if(B->s[i] == 'T')
+														 else if(B.s[i] == 'T')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == '-')
+														 else if(B.s[i] == '-')
 															distance = distance + 1.5 ;
 													 }
 														 
-													 if(A->s[i] == 'C')
+													 if(A.s[i] == 'C')
 													 {
-														 if(B->s[i] == 'A')
+														 if(B.s[i] == 'A')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == 'G')
+														 else if(B.s[i] == 'G')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == 'T')
+														 else if(B.s[i] == 'T')
 															distance = distance + 1.0 ;
-														 else if(B->s[i] == '-')
+														 else if(B.s[i] == '-')
 															distance = distance + 1.5 ;
 													 }
 														 
-													 if(A->s[i] == 'G')
+													 if(A.s[i] == 'G')
 													 {
-														 if(B->s[i] == 'C')
+														 if(B.s[i] == 'C')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == 'A')
+														 else if(B.s[i] == 'A')
 															distance = distance + 1.0 ;
-														 else if(B->s[i] == 'T')
+														 else if(B.s[i] == 'T')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == '-')
+														 else if(B.s[i] == '-')
 															distance = distance + 1.5 ;
 													}
 														 
-													if(A->s[i] == 'T')
+													if(A.s[i] == 'T')
 													{
-													   if(B->s[i] == 'C')
+													   if(B.s[i] == 'C')
 															distance = distance + 1.0 ;
-													   else if(B->s[i] == 'G')
+													   else if(B.s[i] == 'G')
 															distance = distance + 1.0 ;
-													   else if(B->s[i] == 'A')
+													   else if(B.s[i] == 'A')
 															distance = distance + 2.0 ;
-													   else if(A->s[i] == '-')
+													   else if(A.s[i] == '-')
 															distance = distance + 1.5 ;
 													}
 													
-													if(A->s[i] == '-')
+													if(A.s[i] == '-')
 													{
-													   if(B->s[i] == 'C')
+													   if(B.s[i] == 'C')
 															distance = distance + 1.5 ;
-													   else if(B->s[i] == 'G')
+													   else if(B.s[i] == 'G')
 															distance = distance + 1.5 ;
-													   else if(B->s[i] == 'A')
+													   else if(B.s[i] == 'A')
 															distance = distance + 1.5 ;
-													   else if(B->s[i] == 'T')
+													   else if(B.s[i] == 'T')
 														   distance = distance + 1.5 ;
 													}
 												 
@@ -147,78 +136,78 @@
 												i++;
 											}
 													 
-											 while(i < (A->taille) )
+											 while(i < (A.taille) )
 											 {
 												 distance = distance + 1.5 ; // partie où il n'y a plus de carac dans B 
 												 i++;
 											 }
 										}
 										 
-										 if(A->taille < B->taille)  //la première séquence est plus courte que la deuxième
+										 if(A.taille < B.taille)  //la première séquence est plus courte que la deuxième
 										{
-											 while( i <= (A->taille))
+											 while( i <= (A.taille))
 											 {
-												 if(B->s[i] != A->s[i] ){
+												 if(B.s[i] != A.s[i] ){
 																			//si les caractères sont les mêmes on ne fait rien 
 													
-												 if(B->s[i] == 'A')
+												 if(B.s[i] == 'A')
 												 {
-														if(A->s[i] == 'C')
+														if(A.s[i] == 'C')
 															distance = distance + 2.0 ;
-														else if(A->s[i] == 'G')
+														else if(A.s[i] == 'G')
 															distance = distance + 1.0 ;
-														else if(A->s[i] == 'T')
+														else if(A.s[i] == 'T')
 															distance = distance + 2.0 ;
-														else if(A->s[i] == '-')
+														else if(A.s[i] == '-')
 															distance = distance + 1.5 ;
 												 }
 												 
-												 if(B->s[i] == 'C')
+												 if(B.s[i] == 'C')
 												 {
-														if(A->s[i] == 'A')
+														if(A.s[i] == 'A')
 															distance = distance + 2.0 ;
-														else if(A->s[i] == 'G')
+														else if(A.s[i] == 'G')
 															distance = distance + 2.0 ;
-														else if(A->s[i] == 'T')
+														else if(A.s[i] == 'T')
 															distance = distance + 1.0 ;
-														else if(A->s[i] == '-')
+														else if(A.s[i] == '-')
 															distance = distance + 1.5 ;
 												 }
 												 
-												 if(B->s[i] == 'G')
+												 if(B.s[i] == 'G')
 												 {
-														if(A->s[i] == 'C')
+														if(A.s[i] == 'C')
 															distance = distance + 2.0 ;
-														else if(A->s[i] == 'A')
+														else if(A.s[i] == 'A')
 															distance = distance + 1.0 ;
-														else if(A->s[i] == 'T')
+														else if(A.s[i] == 'T')
 															distance = distance + 2.0 ;
-														else if(A->s[i] == '-')
+														else if(A.s[i] == '-')
 															distance = distance + 1.5 ;
 												 }
 												 
-												 if(B->s[i] == 'T')
+												 if(B.s[i] == 'T')
 												 {
-														if(A->s[i] == 'C')
+														if(A.s[i] == 'C')
 															distance = distance + 1.0 ;
-														else if(A->s[i] == 'G')
+														else if(A.s[i] == 'G')
 															distance = distance + 1.0 ;
-														else if(A->s[i] == 'A')
+														else if(A.s[i] == 'A')
 															distance = distance + 2.0 ;
-														else if(A->s[i] == '-')
+														else if(A.s[i] == '-')
 															distance = distance + 1.5 ;
 														
 												 }
 												 
-												 if(B->s[i] == '-')
+												 if(B.s[i] == '-')
 													{
-													   if(A->s[i] == 'C')
+													   if(A.s[i] == 'C')
 															distance = distance + 1.5 ;
-													   else if(A->s[i] == 'G')
+													   else if(A.s[i] == 'G')
 															distance = distance + 1.5 ;
-													   else if(A->s[i] == 'A')
+													   else if(A.s[i] == 'A')
 															distance = distance + 1.5 ;
-													   else if(A->s[i] == 'T')
+													   else if(A.s[i] == 'T')
 														   distance = distance + 1.5 ;
 													}
 												 
@@ -226,77 +215,77 @@
 												 i++;
 											 }
 											 
-											 while(i < (B->taille) )
+											 while(i < (B.taille) )
 											 {
 												 distance = distance + 1.5 ; // partie où il n'y a plus de carac dans A 
 												 i++;
 											 }
 										 }
 										
-										if(A->taille == B->taille)  //la première séquence a la même taille que la deuxième
+										if(A.taille == B.taille)  //la première séquence a la même taille que la deuxième
 										{
-											 while( i < (B->taille))
+											 while( i < (B.taille))
 											 {
-												 if(A->s[i] != B->s[i] )
+												 if(A.s[i] != B.s[i] )
 												 {
 														
-													 if(A->s[i] == 'A')
+													 if(A.s[i] == 'A')
 													 {
-														 if(B->s[i] == 'C')
+														 if(B.s[i] == 'C')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == 'G')
+														 else if(B.s[i] == 'G')
 															distance = distance + 1.0 ;
-														 else if(B->s[i] == 'T')
+														 else if(B.s[i] == 'T')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == '-')
+														 else if(B.s[i] == '-')
 															distance = distance + 1.5 ;
 													 }
 													 
-													 if(A->s[i] == 'C')
+													 if(A.s[i] == 'C')
 													 {
-														 if(B->s[i] == 'A')
+														 if(B.s[i] == 'A')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == 'G')
+														 else if(B.s[i] == 'G')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == 'T')
+														 else if(B.s[i] == 'T')
 															distance = distance + 1.0 ;
-														 else if(B->s[i] == '-')
+														 else if(B.s[i] == '-')
 															distance = distance + 1.5 ;
 													 }
 													 
-													 if(A->s[i] == 'G')
+													 if(A.s[i] == 'G')
 													 {
-														 if(B->s[i] == 'C')
+														 if(B.s[i] == 'C')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == 'A')
+														 else if(B.s[i] == 'A')
 															distance = distance + 1.0 ;
-														 else if(B->s[i] == 'T')
+														 else if(B.s[i] == 'T')
 															distance = distance + 2.0 ;
-														 else if(B->s[i] == '-')
+														 else if(B.s[i] == '-')
 															distance = distance + 1.5 ;
 													 }
 													 
-													 if(A->s[i] == 'T')
+													 if(A.s[i] == 'T')
 													 {
-														 if(B->s[i] == 'C')
+														 if(B.s[i] == 'C')
 															distance = distance + 1.0 ;
-														 else if(B->s[i] == 'G')
+														 else if(B.s[i] == 'G')
 															distance = distance + 1.0 ;
-														 else if(B->s[i] == 'A')
+														 else if(B.s[i] == 'A')
 															distance = distance + 2.0 ;
-														 else if(A->s[i] == '-')
+														 else if(B.s[i] == '-')
 															distance = distance + 1.5 ;
 													 }
 													 
-													 if(A->s[i] == '-')
+													 if(A.s[i] == '-')
 													{
-													   if(B->s[i] == 'C')
+													   if(B.s[i] == 'C')
 															distance = distance + 1.5 ;
-													   else if(B->s[i] == 'G')
+													   else if(B.s[i] == 'G')
 															distance = distance + 1.5 ;
-													   else if(B->s[i] == 'A')
+													   else if(B.s[i] == 'A')
 															distance = distance + 1.5 ;
-													   else if(B->s[i] == 'T')
+													   else if(B.s[i] == 'T')
 														   distance = distance + 1.5 ;
 													}
 												 }
@@ -310,7 +299,7 @@
 									}
 									
 									
-									float distance_sequence_avec_insertions(SEQUENCE * A , SEQUENCE * B )
+									float distance_sequence_avec_insertions(SEQUENCE  A , SEQUENCE  B , int * tailleseq1 , int * tailleseq2)
 									{
 										int cmp , cmpt ;
 										float distance = distance_sequence_sans_insertions(A,B); 
@@ -318,184 +307,94 @@
 										char *s ;
 										int difference ;
 										
-										if((A->taille) > (B->taille))
+										if(A.taille > B.taille)
 										{
-											difference = A->taille - B->taille ;
+											difference = A.taille - B.taille ;
+											s = malloc(B.taille + difference) ;
+										}									
+										if(A.taille < B.taille)
+										{
+											difference = B.taille - A.taille;
+											s = malloc(A.taille + difference);
+										}
+										
+										if ( A.taille > B.taille )
+										{
 											if(difference == 1 )
 											{
-												s = malloc(sizeof(A->taille+1));
+												*(tailleseq2)++ ;
+												cmp = B.taille ;
+												B.s[cmp-1] = '-' ;
+												for(int i = (B.taille-1); i>0 ; i--)
+												{
+													distance_min = distance_sequence_sans_insertions(A,B);
+													if(distance_min < distance )
+													{
+														distance = distance_min ;
+													}
+													B.s[i] = B.s[i-1] ;
+													B.s[i-1] = '-' ;
+												}
 											}
-											else
+											
+											if(difference ==2)
 											{
-												s = malloc(sizeof(A->taille+2));
+												*(tailleseq2)++ ;
+												cmp = B.taille ;
+												B.s[cmp-1] = '-' ;
+												*(tailleseq2)++ ;
+												cmpt = B.taille ;
+												B.s[cmpt-1] = '-' ;
 											}
 										}
-										if((A->taille) < (B->taille))
+										if ( A.taille < B.taille )
 										{
-											difference = B->taille - A->taille ;
 											if(difference == 1 )
 											{
-												s = malloc(sizeof(A->taille+1));
+												*(tailleseq1)++ ;
+												cmp = A.taille ;
+												A.s[cmp-1] = '-' ;
+												for(int i = (A.taille-1); i>0 ; i--)
+												{
+													distance_min = distance_sequence_sans_insertions(A,B);
+													if(distance_min < distance )
+													{
+														distance = distance_min ;
+														printf("A.s : %s\n" , A.s);
+														printf("distance : %f \n",distance);
+														s = A.s ;
+														printf("s 1: %s\n" , s);
+													}
+													A.s[i] = A.s[i-1] ;
+													A.s[i-1] = '-' ;
+												}
+												printf("s 2: %s \n",s);
+												A.s = s ;
 											}
-											else
+											if(difference ==2)
 											{
-												s = malloc(sizeof(A->taille+2));
+												*(tailleseq1)++ ;
+												cmp = A.taille ;
+												A.s[cmp-1] = '-' ;
+												*(tailleseq1)++ ;
+												cmpt = A.taille ;
+												A.s[cmpt-1] = '-' ;
 											}
 										}
 										
-										if(A->taille == B->taille)
-										{
-											distance = distance ;
-										}
-										
-										printf("difference : %d \n",difference);
-										if(A->taille > B->taille)
-										{
-											if(difference == 1)
-											{
-												(B->taille++);
-												B->s[B->taille] = '-' ;
-												distance_min = distance_sequence_sans_insertions(A,B);
-												if(distance_min < distance )
-												{
-													distance = distance_min ;
-													s = B->s ;
-												}
-												for(int j = B->taille ; j>0 ; j--)
-												{
-													B->s[j] = B->s[j-1] ;
-													B->s[j-1] = '-' ;
-													distance_min = distance_sequence_sans_insertions(A,B);
-													if(distance_min < distance )
-													{
-														distance = distance_min ;
-														s = B->s ;
-													}
-												}
-												B->s = s ;
-											}
-											
-											if(difference == 2)
-											{
-												(B->taille++);
-												 B->s[B->taille] = '-' ;
-											    (B->taille++);
-											     cmp = B->taille ;
-												 B->s[B->taille] = '-' ;
-												 cmpt = B->taille;
-												 s = B->s ;
-												for(int i = B->taille ; i > 0 ; i--)
-												{
-													distance_min = distance_sequence_sans_insertions(A,B);
-													if(distance_min < distance )
-													{
-														distance = distance_min ;
-														s = B->s ;
-													}
-													
-													for(int j = (B->taille-1) ; j>0 ; j--)
-													{
-														B->s[j] = B->s[j-1] ;
-														B->s[j-1] = '-' ;
-														cmp-- ;
-														distance_min = distance_sequence_sans_insertions(A,B);
-														if(distance_min < distance )
-														{
-															distance = distance_min ;
-															s = B->s ;
-														}
-													}
-													
-													(cmpt--);
-													B->s[B->taille] = B->s[cmpt];
-													B->s[cmpt] = '-' ;
-													while(cmp != (cmpt-1))
-													{
-														B->s[cmp] = B->s[cmp+1] ;
-														B->s[cmp+1] = '-' ;
-														cmp++;
-													}
-												}
-													
-												B->s = s ;
-											}
-										}						
-											
-										if(A->taille < B->taille)
-										{
-											if(difference == 1)
-											{
-												(A->taille++);
-												A->s[A->taille] = '-' ;
-												distance_min = distance_sequence_sans_insertions(A,B);
-												if(distance_min < distance )
-												{
-													distance = distance_min ;
-													s = A->s ;
-												}
-												
-												for(int j = A->taille ; j>0 ; j--)
-												{
-													A->s[j] = A->s[j-1] ;
-													A->s[j-1] = '-' ;
-													distance_min = distance_sequence_sans_insertions(A,B);
-													if(distance_min < distance )
-													{
-														distance = distance_min ;
-														s = A->s ;
-													}
-												}
-												printf("orange \n");
-												A->s = s ;
-											}
-											
-											if(difference == 2)
-											{
-												A->s[18] = '-' ;
-												
-												cmp =18;
-												printf(" dernier carac %c \n",A->s[cmp]);
-												A->s[19] = '-' ;
-												cmpt =19;
-												A = A->s ;
-												for(int i = 18 ; i > 0 ; i--)
-												{
-													distance_min = distance_sequence_sans_insertions(A,B);
-													if(distance_min < distance )
-													{
-														distance = distance_min ;
-														printf("orange \n");
-														s = A->s ;
-													}
-													for(int j = (A->taille-1) ; j>0 ; j--)
-													{
-														A->s[j] = A->s[j-1] ;
-														A->s[j-1] = '-' ;
-														cmp-- ;
-														distance_min = distance_sequence_sans_insertions(A,B);
-														if(distance_min < distance )
-														{
-															distance = distance_min ;
-															s = A->s ;
-														}
-													}
-													
-													(cmpt--);
-													A->s[cmpt+1] = A->s[cmpt];
-													A->s[cmpt] = '-' ;
-													while(cmp != (cmpt-1))
-													{
-														A->s[cmp] = A->s[cmp+1] ;
-														A->s[cmp+1] = '-' ;
-														cmp++;
-													}
-												}
-													
-												A->s = s ;
-											}
-										}
 										return distance ;
 									}
+									
+									
+									void afficher_tab(SEQUENCE D[])
+									{
+										for ( int i = 0 ; i < 20 ; i++)
+										{
+											printf("D[%d] : %s , taille : %d\n",i,D[i].s,D[i].taille);
+										}
+									}
+									
+									
 									
 									void liberer_seq(SEQUENCE * A)
 									{

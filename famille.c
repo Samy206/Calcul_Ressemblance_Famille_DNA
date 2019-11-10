@@ -34,7 +34,7 @@
 												if(i != j)
 												{
 													SEQUENCE B = initialiser_sequence(argv[j]);
-													f=distance_sequence_avec_insertions(&A,&B);
+													f=distance_sequence_avec_insertions(A,B,&A.taille,&B.taille);
 													if(f == distance)
 													{
 														cmp++;
@@ -63,7 +63,7 @@
 											{
 												if( i != j)
 												{
-													d = distance_sequence_avec_insertions(&D[i],&D[j]);
+													d = distance_sequence_avec_insertions(D[i],D[j],&D[i].taille,&D[j].taille);
 													push_liste(l,d,get_indice(argv[i])+1,get_indice(argv[j])+1);
 												}
 											}
@@ -83,7 +83,7 @@
 											if(numero != j)
 											{
 												SEQUENCE B = initialiser_sequence(argv[j]);
-												d = distance_sequence_avec_insertions(&A,&B);
+												d = distance_sequence_avec_insertions(A,B,&A.taille,&B.taille);
 												if( d == distance )
 												{
 													taille++;
@@ -99,7 +99,7 @@
 											if(numero != j)
 											{
 												SEQUENCE B = initialiser_sequence(argv[j]);
-												d = distance_sequence_avec_insertions(&C,&B);
+												d = distance_sequence_avec_insertions(C,B,&C.taille,&B.taille);
 												if( d == distance )
 												{
 													T[taille] = j ;

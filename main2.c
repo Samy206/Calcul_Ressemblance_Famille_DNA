@@ -10,17 +10,15 @@
 										SEQUENCE D[20] ;
 										initialiser_tab_seq(D,argv);
 										
-										for ( int i = 0 ; i < 20 ; i++)
-										{
-											printf("D[%2d] : %s , taille : %d\n",i,D[i].s,D[i].taille);
-										}
-										/*LISTE *l =creer_liste_initiale(D,argv);
-										for ( int i = 0 ; i < 20 ; i++)
-										{
-											printf("D[%2d] : %s , taille : %d\n",i,D[i].s,D[i].taille);
-										}*/
-										float dist = distance_sequence_avec_insertions(&D[0],&D[4]);
-										printf("dist : %f\n",dist);
+										afficher_tab(D);
+										printf("\n");
+										printf("\n");
+										float distanced = distance_sequence_sans_insertions(D[0],D[17],&D[0].taille,&D[17].taille);
+										float distance = distance_sequence_avec_insertions(D[0],D[17]);
+										afficher_tab(D);
+										printf("distance : %f \n",distanced);
+										
+
 										
 										exit(0);
 									}
