@@ -25,6 +25,19 @@
 										return l ;
 									}
 									
+									int est_vide(LISTE *l)
+									{
+										if((l->nombre == 1 && l->premier->val == 0) || l->nombre == 0 )
+										{
+											printf("la liste est vide \n");
+											return 0 ;
+										}
+										else
+										{
+											return 1 ;
+										}
+									}
+										
 									void liberer_liste(LISTE *l)
 									{
 										DISTANCE *e = l->premier ;
@@ -43,11 +56,19 @@
 									{
 										
 										int i ;
-										char* c;
+										char** c;
+										*c = malloc(2);
 										char s[2];
 										s[0] = argv[13];
 										s[1] = argv[14];
-										i = strtol(s,&c,10);
+										if(s[0] == '0')
+										{
+											i = ((int) s[1] ) - 48 ;
+										}
+										else
+										{
+											i = strtol(s,c,10);
+										}
 										return i ;
 									}
 									
@@ -65,7 +86,7 @@
 									}
 																	
 									
-									void push_liste(LISTE *l , int val , int a , int b)
+									void push_liste(LISTE *l , float val , int a , int b)
 									{
 										if(l == NULL )
 										{
@@ -142,6 +163,7 @@
 									void ecrire_fichier_liste_fin(LISTE *l , char * argv)
 									{
 										FILE *F = fopen(argv,"w");
+
 										if(F == NULL)
 										{
 											printf("problème d'ouverture de fichier ecriture\n");
@@ -149,14 +171,14 @@
 										}
 										
 										DISTANCE *d = l->premier ;
-										fprintf(F,"La liste de distance est [ \n");
+										fprintf(F," La liste de distance est [ \n");
 										while( d != NULL)
 										{
-											fprintf(F,"la distance entre les séquences numéro %2d et numéro %2d est est %f\n",d->indiceg,d->indiced,d->val);
+											fprintf(F,"la distance entre les sequences numero %2d et numero %2d est est %f\n",d->indiceg,d->indiced,d->val);
 											d = d->suiv ;
 										}
 										fprintf(F,"]\n");
-										fprintf(F,"il y a %d éléments.\n",l->nombre);
+										fprintf(F,"il y a %d elements.\n \n",l->nombre);
 										fclose(F);	
 									}
 									
@@ -186,6 +208,11 @@
 									
 									void afficher_liste(LISTE *l)
 									{
+										if( l->nombre == 1)
+										{
+											printf("9lawi\n");
+											exit(5);
+										}
 										DISTANCE *d ;
 										d = l->premier ;
 										printf("la liste de distance  est \n");
@@ -207,7 +234,6 @@
 										{
 											if(d->indiceg == indiceg && d->indiced == indiced)
 											{
-												printf("distance recherchée : %f\n",d->val);
 												return cmp ;
 											}
 											else
@@ -223,14 +249,20 @@
 									void supp_numero_seq(LISTE *l , int numero)
 									{
 										int indice ;
-										for(int i = 20 ; i >= 1 ; i--)
+										DISTANCE *e = l->premier ;
+										while( e != NULL )
 										{
-											if(i != numero)
+											if(e->indiceg == numero )
 											{
-												indice = get_numero_distance(l,numero,i);
-												printf("indice a supp : %d \n",i);
+												indice = get_numero_distance (l,numero,e->indiced);
 												pop_liste_place(l,indice);
 											}
+											if(e->indiced == numero )
+											{
+												indice = get_numero_distance (l,e->indiceg,numero);
+												pop_liste_place(l,indice);
+											}
+											e = e->suiv ;
 										}
 									}
 										

@@ -1,13 +1,18 @@
 								#ifndef DEF_SEQUENCE
 								#define DEF_SEQUENCE
 								
+								#include "distance.h"
+								#include "combi.h"
+								
 								struct sequence
 								{
 									int taille ; //taille sequence
 									char *s ; //chaîne de caractères
 								};
-								
 								typedef struct sequence SEQUENCE;
+								
+
+								
 								
 								int get_taille_seq(char *argv);
 								
@@ -19,10 +24,18 @@
 								
 								float distance_sequence_sans_insertions( SEQUENCE  A, SEQUENCE B);
 								
-								float distance_sequence_avec_insertions( SEQUENCE  A, SEQUENCE B , int * tailleseq1 , int * tailleseq2);
+								float distance_combinaisons(LISTE *l ,SEQUENCE A , SEQUENCE B , float distance  , int indiceg , int indiced , char *argv);
+								
+								float distance_sequence_avec_insertions(LISTE *l ,SEQUENCE A , SEQUENCE B , int indiceg , int indiced , char *argv);
 								
 								void afficher_tab(SEQUENCE D[]);
 								
 								void liberer_seq(SEQUENCE * A);
+								
+								void ajouter_seq_fichier(char * s , char * v  , int indiceg , int indiced , char * argv , float val);
+								
+								void clean_fichier(char *argv);
+								
+								void copie_string( char *a , char *b, int fin);
 								
 								#endif

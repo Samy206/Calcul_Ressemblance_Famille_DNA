@@ -24,7 +24,9 @@
 							
 							int liste_vide(LISTE *l);
 							
-							void push_liste(LISTE *l , int val , int a , int b);
+							int est_vide(LISTE *l);
+							
+							void push_liste(LISTE *l , float val , int a , int b);
 							
 							void ecrire_fichier_liste_fin(LISTE *l , char * argv );
 							

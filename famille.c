@@ -4,6 +4,46 @@
 									#include <string.h>
 									#include "sequence.h"
 									#include "distance.h"
+									#include "famille.h"
+									
+									
+									FAMILLE * creer_famille_initiale(int nb)
+									{
+										FAMILLE *f = malloc(sizeof(FAMILLE));
+										f->table = malloc(nb*sizeof(SEQUENCE));
+										f->n = nb ;
+										f->s = NULL ;
+										return f ;
+									}
+									
+									
+									void remplir_famille(FAMILLE *f , int T[] ,SEQUENCE D[])
+									{
+										for(int i = 0 ; i < f->n ; i++)
+										{
+											f->table[i] = D[T[i]];
+										}
+									}
+									
+									void ecrire_fich_fam(FAMILLE *f  , int T[] , char *argv)
+									{
+										FILE *F = fopen(argv,"a");
+										if(F == NULL)
+										{
+											printf("problème d'ouverture de fichier ecriture\n");
+											exit(3);
+										}
+									
+										fprintf(F," la famille est [\n");
+										for(int i = 0 ; i < f->n ; i++)
+										{
+											fprintf(F,"la sequence %d est : %s \n",T[i],f->table[i].s);
+										}
+										fprintf(F,"]\n");
+										fprintf(F,"il y a %d sequences.\n\n",f->n);
+										
+										fclose(F);	
+									}
 									
 									float recherche_distance_min(LISTE *l)
 									{
@@ -20,97 +60,73 @@
 										return min ;
 									}
 									
-									int get_num_freq_max( float distance , char **argv)
+									int get_num_freq_max( float distance , LISTE *l)
 									{
-										float f = 0 ;
-										int cmp = 0 ;
-										int max = 0 ;
-										int numero ;
-										for(int i = 20 ; i >= 1 ; i--)
+										int max , cmp , numero ;
+										max = 0 ;
+										DISTANCE *e ; 
+										for(int i  = 1 ; i < 21 ; i++)
 										{
-											SEQUENCE A = initialiser_sequence(argv[i]);
-											for(int j = 20 ; j >= 1 ; j--)
+											e = l->premier ;
+											cmp = 0 ;
+											while(e != NULL)
 											{
-												if(i != j)
+												if(e->val == distance && e->indiceg == i )
 												{
-													SEQUENCE B = initialiser_sequence(argv[j]);
-													f=distance_sequence_avec_insertions(A,B,&A.taille,&B.taille);
-													if(f == distance)
-													{
-														cmp++;
-													}
-													liberer_seq(&B);
+													cmp++;
 												}
+												e = e->suiv ;
 											}
-											liberer_seq(&A);
-											if(cmp > max )
+											if(cmp >= max )
 											{
 												max = cmp ;
-												numero = i;
+												numero = i ;
 											}
-											cmp = 0 ;
 										}
 										return numero ;
 									}
+										
 									
-									LISTE * creer_liste_initiale(SEQUENCE D[] , char ** argv)
+									LISTE * creer_liste_initiale(LISTE * l , SEQUENCE D[] , char ** argv)
 									{
 										float d ;
-										LISTE *l = initialiser_liste();
-										for(int i = 19 ; i >= 0 ; i--)
+										
+										LISTE *l_modif = initialiser_liste();
+										for(int i = 20 ; i >= 1 ; i--)
 										{
-											for(int j = 19 ; j >= 0 ; j--)
+											for(int j = 20 ; j >= 1 ; j--)
 											{
-												if( i != j)
-												{
-													d = distance_sequence_avec_insertions(D[i],D[j],&D[i].taille,&D[j].taille);
-													push_liste(l,d,get_indice(argv[i])+1,get_indice(argv[j])+1);
+												if( i != j )
+												{	
+													d = distance_sequence_avec_insertions(l_modif,D[i],D[j],i,j,argv[22]);
+													push_liste(l,d,i,j);
 												}
 											}
 										}
 										ecrire_fichier_liste_fin(l,argv[21]);
-										
-										return l ;
+										return l_modif ;
 									}
 									
-									int get_num_autre(int *T , int numero , float distance , char **argv)
+									
+									
+									
+									int get_num_autre(int *T , float distance , int numero , LISTE *l)
 									{
-										float d ;
-										int taille = 0 ;
-										SEQUENCE A = initialiser_sequence(argv[numero]);
-										for(int j = 20 ; j >= 1 ; j--)
+										DISTANCE *e = l->premier ;
+										int  i = 1 ;
+										while(e != NULL)
 										{
-											if(numero != j)
+											if(e->val == distance && e->indiceg == numero)
 											{
-												SEQUENCE B = initialiser_sequence(argv[j]);
-												d = distance_sequence_avec_insertions(A,B,&A.taille,&B.taille);
-												if( d == distance )
-												{
-													taille++;
-												}
-												liberer_seq(&B);	
+												T[i] = e->indiced ;
+												i++;
 											}
-										}
-										liberer_seq(&A);
-										taille = 0 ;
-										SEQUENCE C = initialiser_sequence(argv[numero]);
-										for(int j = 20 ; j >= 1 ; j--)
-										{
-											if(numero != j)
-											{
-												SEQUENCE B = initialiser_sequence(argv[j]);
-												d = distance_sequence_avec_insertions(C,B,&C.taille,&B.taille);
-												if( d == distance )
-												{
-													T[taille] = j ;
-													taille++ ;
-												}
-												liberer_seq(&B);	
-											}
-										}
-										liberer_seq(&A);
-										return taille ;
+											e = e->suiv ;
+										}			
+										return i ;
 									}
+									
+									
 									
 
 									
