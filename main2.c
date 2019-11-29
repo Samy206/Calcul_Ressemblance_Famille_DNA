@@ -9,6 +9,7 @@
 									
 									int main(int argc , char ** argv)
 									{
+										
 										clean_fichier(argv[23]);
 										clean_fichier(argv[22]);
 										clean_fichier(argv[21]);
@@ -31,10 +32,6 @@
 											T[0] = numero  ;
 											taille =get_num_autre(T,d,numero,l);
 											f = creer_famille_initiale(taille);
-											for(int i = 0 ; i < taille ; i++)
-											{
-												printf("T[%d] : %d\n",i,T[i]);
-											}
 											remplir_famille(f,T,D);
 											ecrire_fich_fam(f,T,argv[23]);
 									
@@ -47,15 +44,7 @@
 											free(f);
 											
 										}
-
-										/*float d  =distance_sequence_avec_insertions(l,D[2],D[5],2,5,argv[22]);
-										printf("d : %f\n",d);
-										afficher_liste(l);*/
 										
-										/*afficher_liste(l);
-										printf("\n");
-										printf("\n");
-										afficher_liste(M);*/
 										exit(0);
 									}
 									

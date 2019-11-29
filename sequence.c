@@ -52,8 +52,7 @@
 										return A ;
 									}
 									
-									
-									
+																		
 									void initialiser_tab_seq (SEQUENCE D[] , char ** argv)
 									{
 										
@@ -76,8 +75,12 @@
 											
 											 while( i < (B.taille) )
 											 {
+													//Comparaison caractères par caractères dans la séquence la plus courte
+													
 													 if(A.s[i] != B.s[i] )
 													 {			
+														 //si les caractères sont les mêmes on ne fait rien 
+														 
 														 if(A.s[i] == 'A')
 														 {
 															 if(B.s[i] == 'C')
@@ -143,9 +146,12 @@
 														i++;
 												}
 												 i =0 ; 
+												 
+												 // partie où il n'y a plus de carac dans B.s :  
+												 
 												 while(i < difference )
 												 {
-													 distance = distance + 1.5 ; // partie où il n'y a plus de carac dans B 
+													 distance = distance + 1.5 ; 
 													 i++;
 												 }
 										}
@@ -158,7 +164,8 @@
 											{
 											    if(B.s[i] != A.s[i] )
 												{
-																				//si les caractères sont les mêmes on ne fait rien 
+													//si les caractères sont les mêmes on ne fait rien
+													 
 													if(B.s[i] == 'A')
 												    {
 														if(A.s[i] == 'C')
@@ -224,9 +231,12 @@
 													i++;
 											} 
 												 i = 0 ;
+												 
+												  // partie où il n'y a plus de carac dans A.s :
+												 
 												 while(i < difference1 )
 												 {
-													 distance = distance + 1.5 ; // partie où il n'y a plus de carac dans A 
+													 distance = distance + 1.5 ;
 													 i++;
 												 }
 											 
@@ -305,11 +315,11 @@
 													i++;
 											}
 										}
-											 // pas de partie où il n'y a pas de caractères en face de '-'										
+										// pas de partie où il n'y a pas de caractères en face de '-'	
+										
+																			
 										return distance ;
 									}
-
-									
 									
 									float distance_combinaisons(LISTE *l ,SEQUENCE A , SEQUENCE B , float distance  , int indiceg , int indiced ,char *argv)
 									{
@@ -319,31 +329,32 @@
 										
 										if(diff == 1)
 										{
-											COMB com = put_dash(B.s);
-											SEQUENCE C , D  ;
+											COMB com = put_dash(B.s);    //on ajoute un seul tiret
+											SEQUENCE C , D  ;           //C est la séquence qui va récupérer les modifications de la séquence B (B.s)
 											for(int i = 0 ; i<com.taille ; i++)
 											{
-												C.taille = strlen(com.tab[i]) ;
+												C.taille = strlen(com.tab[i]) ;   //comb.tab est l'ensemble des combinaisons possibles
 												C.s = com.tab[i] ;
 													
 												distance_min = distance_sequence_sans_insertions(A,C);
 												if(distance_min <= distance )
 												{
-													D.s = C.s;
-													D.taille = C.taille ;
+													D.s = C.s;                    
+													D.taille = C.taille ;          //On enregsitre les modif. de la séquence C dans la séquence D
 													distance = distance_min ;
 												}
 											}
 											
-											ajouter_seq_fichier(A.s,D.s,indiceg,indiced,argv,distance);
-											push_liste(l,distance,indiceg,indiced);
+											ajouter_seq_fichier(A.s,D.s,indiceg,indiced,argv,distance);    
+																							//On enregsitre la séquence D et on écrit dans le ficher liste_seq_modif la seq A et D avec leur distance minimale	
+											push_liste(l,distance,indiceg,indiced);			//On les met aussi dans une liste
 										}
 										
 										else if ( diff == 2)
 										{
 											COMB com = put_double_dash(B.s);
 											SEQUENCE C , D  ;
-											for(int i = 0 ; i<com.taille ; i++)
+											for(int i = 0 ; i<com.taille ; i++)        
 											{
 												C.taille = strlen(com.tab[i]) ;
 												C.s = com.tab[i] ;
@@ -357,12 +368,11 @@
 											}
 											
 											ajouter_seq_fichier(A.s,D.s,indiceg,indiced,argv,distance);
-											push_liste(l,distance,indiceg,indiced);
+											push_liste(l,distance,indiceg,indiced); 							//mêmes commentaires sauf qu'on ajoute deux tirets cette fois ci
 										}
 										return distance ;
 									}
-											
-										
+																					
 									float distance_sequence_avec_insertions(LISTE *l ,SEQUENCE A , SEQUENCE B , int indiceg , int indiced , char *argv)
 									{
 										float distance = distance_sequence_sans_insertions(A,B); 
@@ -370,17 +380,17 @@
 										
 										if(A.taille == B.taille )
 										{
-											push_liste(l,distance,indiceg,indiced);
+											push_liste(l,distance,indiceg,indiced);        //Si les deux séquences ont la même taille on appelle la fonction qui calcule la distance sans ajout de tiret
 											return distance;
 										}
 										
 										else if(A.taille > B.taille )
 										{
-											return distance_combinaisons(l,A,B, distance , indiceg , indiced,argv);	
+											return distance_combinaisons(l,A,B, distance , indiceg , indiced,argv);	  // la fonction précédente fait tout et on appelle avec la séquence la plus grande ( ici A)
 										}
 										else if (B.taille > A.taille)
 										{
-											return distance_combinaisons(l,B,A, distance , indiced , indiceg,argv);	
+											return distance_combinaisons(l,B,A, distance , indiced , indiceg,argv);	// la fonction précédente fait tout et on appelle avec la séquence la plus grande ( ici B)
 										}
 										
 									}
@@ -394,21 +404,18 @@
 										printf("\n");
 										printf("\n");
 									}
-									
-									
-									
+																		
 									void liberer_seq(SEQUENCE * A)
 									{
 										free(A->s);
 										free(A);
 									}
-									
-									
+																		
 									void ajouter_seq_fichier(char * s , char * v  , int indiceg , int indiced , char * argv , float val)
 									{
 										FILE *F = fopen(argv,"a");
 										if(F == NULL)
-										{
+										{																// on écrit dans le nom de fichier passé en argument
 											printf("problème d'ouverture de fichier ecriture\n");
 											exit(3);
 										}
@@ -434,6 +441,26 @@
 									{
 										for(int i = 0 ; i < fin ; i++)
 										{
-											a[i] = b[i] ;
+											a[i] = b[i] ;              //similaire à strcpy()
 										}
 									}
+									
+									/*float ajout_tiret_distance ( SEQUENCE A , SEQUENCE B , int i , int j )
+									{	
+										float distance , distancemin;
+										distance = distance_sequence_sans_insertions(A,B);
+										distancemin = distance ;
+										if( i < 0 || j < 0 )
+										{
+											return distancemin ;
+										}
+										else
+										{
+											B.s[i] = '-' ;
+											s
+										}
+										return distancemin;
+									}*/
+
+
+								

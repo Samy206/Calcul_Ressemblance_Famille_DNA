@@ -6,7 +6,7 @@
 							struct famille
 							{
 								int n ;
-								SEQUENCE *table;
+								SEQUENCE * table;
 								char *s ; //sequence consensus
 							};
 							typedef struct famille FAMILLE;

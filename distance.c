@@ -178,7 +178,6 @@
 											d = d->suiv ;
 										}
 										fprintf(F,"]\n");
-										fprintf(F,"il y a %d elements.\n \n",l->nombre);
 										fclose(F);	
 									}
 									
@@ -213,13 +212,13 @@
 											printf("9lawi\n");
 											exit(5);
 										}
-										DISTANCE *d ;
+										DISTANCE *d ;									//on entre dans toute la liste 
 										d = l->premier ;
 										printf("la liste de distance  est \n");
 										printf("[ \n");
 										while(d != NULL)
 										{
-											printf("distance entre les séquences %d et %d : %f \n",d->indiceg,d->indiced,d->val);
+											printf("distance entre les séquences %d et %d : %f \n",d->indiceg,d->indiced,d->val); //on affiche valeur par valeur 
 											d = d->suiv ;
 										}
 										printf("]\n");
@@ -232,13 +231,13 @@
 										int cmp = 0;
 										while(d != NULL)
 										{
-											if(d->indiceg == indiceg && d->indiced == indiced)
+											if(d->indiceg == indiceg && d->indiced == indiced) //on cherche le numéro distance entre la séquence numéro indiceg et indiced
 											{
 												return cmp ;
 											}
 											else
 											{
-												d = d->suiv ;
+												d = d->suiv ;                   // si ce n'est pas le premier on cherche dans toute la liste
 												(cmp)++;
 											}
 										}
@@ -252,12 +251,12 @@
 										DISTANCE *e = l->premier ;
 										while( e != NULL )
 										{
-											if(e->indiceg == numero )
+											if(e->indiceg == numero )           //si on trouvre le numéro de la séquence en indice gauche on supprime directement la distance dans la liste
 											{
 												indice = get_numero_distance (l,numero,e->indiced);
-												pop_liste_place(l,indice);
+												pop_liste_place(l,indice);      
 											}
-											if(e->indiced == numero )
+											if(e->indiced == numero )          //si on trouvre le numéro de la séquence en indice droite on supprime directement la distance dans la liste
 											{
 												indice = get_numero_distance (l,e->indiceg,numero);
 												pop_liste_place(l,indice);
