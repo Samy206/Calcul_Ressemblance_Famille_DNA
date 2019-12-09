@@ -16,15 +16,14 @@
 										SEQUENCE D[21] ;
 										initialiser_tab_seq(D,argv);
 										afficher_tab(D);
-										LISTE *l = initialiser_liste();
-										LISTE *M = creer_liste_initiale(l,D,argv);
+										LISTE *l = creer_liste_initiale(D,argv);
 										
 										
 										int T[10] , numero , taille ;
 										float d ;
 										FAMILLE *f;
 										int i = 0 ;
-										for(i = 0 ; i < 5 ; i++)
+										for(i = 0 ; i < 7 ; i++)
 										{
 											
 											d = recherche_distance_min(l);

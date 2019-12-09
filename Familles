@@ -1,41 +1,48 @@
 
 la famille est [
+la sequence 17 est : ATTTGTAGAAGTACATTAA 
+la sequence 14 est : TTTTGTAGAAGTACATTAA 
+]
+il y a 2 sequences.
+
+ la famille est [
 la sequence 18 est : TTCTATGGAATCTTTTTA 
-la sequence 8 est : TTCTATGGAATCTCTTTA 
+la sequence  8 est : TTCTATGGAATCTCTTTA 
 la sequence 10 est : TTCTATGGAATTTTTTTA 
 la sequence 20 est : TCCTATGGAATCTTTTTA 
 ]
 il y a 4 sequences.
 
  la famille est [
-la sequence 7 est : CTTCTCGGGAGCTATTTG 
-la sequence 9 est : CTGTCTCGGGAGCTATTTG 
-la sequence 19 est : CTTCTCGAGGAGCTATTTG 
-]
-il y a 3 sequences.
-
- la famille est [
-la sequence 14 est : TTTTGTAGAAGTACATTAA 
-la sequence 5 est : CTTTGTAGAGGTACATTAA 
-la sequence 13 est : TTTTGTAGAAGAACATTAA 
-la sequence 16 est : TTTTGTAGAAGTTCATTAA 
-la sequence 17 est : ATTTGTAGAAGTACATTAA 
-]
-il y a 5 sequences.
-
- la famille est [
 la sequence 15 est : GCCACTGAAAACCTCCCG 
-la sequence 2 est : GCCACTAAAAACCTTCCG 
-la sequence 6 est : GCCACTCAAAACCTCCCG 
+la sequence  2 est : GCCACTAAAAACCTTCCG 
+la sequence  6 est : GCCACTCAAAACCTCCCG 
 la sequence 12 est : GCCACTGAAAACATCCCG 
 ]
 il y a 4 sequences.
 
  la famille est [
-la sequence 1 est : CTTCATCCCCTCTTTCA 
-la sequence 3 est : CTTCTGTCCCCTCTTTCA 
-la sequence 4 est : CTTCACCCCCCTCTTTCA 
-la sequence 11 est : GTTTCATCCCCTCTTTCA 
+la sequence  5 est : CTTTGTAGAGGTACATTAA 
+la sequence 13 est : TTTTGTAGAAGAACATTAA 
+la sequence 16 est : TTTTGTAGAAGTTCATTAA 
 ]
-il y a 4 sequences.
+il y a 3 sequences.
+
+ la famille est [
+la sequence 11 est : GTTTCATCCCCTCTTTCA 
+la sequence  3 est : CTTCTGTCCCCTCTTTCA 
+]
+il y a 2 sequences.
+
+ la famille est [
+la sequence 19 est : CTTCTCGAGGAGCTATTTG 
+la sequence  9 est : CTGTCTCGGGAGCTATTTG 
+]
+il y a 2 sequences.
+
+ la famille est [
+la sequence  4 est : CTTCACCCCCCTCTTTCA 
+la sequence  1 est : CTTCATCCCCTCTTTCA 
+]
+il y a 2 sequences.
 

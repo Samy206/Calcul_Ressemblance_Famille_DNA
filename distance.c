@@ -8,7 +8,7 @@
 									
 									LISTE * initialiser_liste()
 									{
-										LISTE * l = malloc(sizeof(LISTE*));
+										LISTE * l = malloc(sizeof(LISTE*));                   //On alloue de la mémoire pour une liste et pour une première distance ( qui vaudra 0)
 										DISTANCE *d = malloc(sizeof(DISTANCE));
 										if(l == NULL || d == NULL)
 										{
@@ -18,7 +18,7 @@
 										l->nombre = 1 ;
 										d->val = 0.0 ;
 										d->indiced = 0 ;
-										d->indiceg = 0 ;
+										d->indiceg = 0 ;									//Première distance = "vierge"
 										d->suiv = NULL ;
 										l->premier = d ;
 									
@@ -27,7 +27,7 @@
 									
 									int est_vide(LISTE *l)
 									{
-										if((l->nombre == 1 && l->premier->val == 0) || l->nombre == 0 )
+										if((l->nombre == 5 && l->premier->val == 0) || l->nombre == 5 )  //Si la première distance est vierge ou si la liste est vide on renvoie 0 sinon 1
 										{
 											printf("la liste est vide \n");
 											return 0 ;
@@ -56,8 +56,8 @@
 									{
 										
 										int i ;
-										char** c;
-										*c = malloc(2);
+										char* c;
+										c = malloc(2);
 										char s[2];
 										s[0] = argv[13];
 										s[1] = argv[14];
@@ -67,7 +67,7 @@
 										}
 										else
 										{
-											i = strtol(s,c,10);
+											i = strtol(s,&c,10);
 										}
 										return i ;
 									}
@@ -178,6 +178,7 @@
 											d = d->suiv ;
 										}
 										fprintf(F,"]\n");
+										fprintf(F,"Il y a %d elements dans la liste \n",l->nombre);
 										fclose(F);	
 									}
 									
@@ -245,7 +246,7 @@
 										return 0 ;
 									}
 									
-									void supp_numero_seq(LISTE *l , int numero)
+									void supp_numero_seq(LISTE *l , int numero )
 									{
 										int indice ;
 										DISTANCE *e = l->premier ;

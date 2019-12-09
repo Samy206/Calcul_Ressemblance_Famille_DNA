@@ -2,6 +2,8 @@
 											#include <stdlib.h>
 											#include <string.h>
 											#include "combi.h"
+											#include "sequence.h"
+											#include "distance.h"
 										
 											
 											

@@ -20,7 +20,7 @@
 							
 							float recherche_distance_min(LISTE *l);
 							
-							LISTE * creer_liste_initiale(LISTE *l , SEQUENCE D[], char **argv);
+							LISTE * creer_liste_initiale(SEQUENCE D[], char **argv);
 							
 							int get_num_freq_max( float distance , LISTE *l);
 							

@@ -37,7 +37,7 @@
 										fprintf(F," la famille est [\n");
 										for(int i = 0 ; i < f->n ; i++)
 										{
-											fprintf(F,"la sequence %d est : %s \n",T[i],f->table[i].s);
+											fprintf(F,"la sequence %2d est : %s \n",T[i],f->table[i].s);
 										}
 										fprintf(F,"]\n");
 										fprintf(F,"il y a %d sequences.\n\n",f->n);
@@ -87,24 +87,31 @@
 									}
 										
 									
-									LISTE * creer_liste_initiale(LISTE * l , SEQUENCE D[] , char ** argv)
+									LISTE * creer_liste_initiale(SEQUENCE D[] , char ** argv)
 									{
 										float d ;
-										
-										LISTE *l_modif = initialiser_liste();
+										float **T ;
+										LISTE *l = initialiser_liste();
+										T = malloc(19*sizeof(float));
+										for(int i = 0 ; i < 19 ; i++ )
+										{
+											T[i] = malloc(19*sizeof(float));
+										}
 										for(int i = 20 ; i >= 1 ; i--)
 										{
 											for(int j = 20 ; j >= 1 ; j--)
 											{
 												if( i != j )
 												{	
-													d = distance_sequence_avec_insertions(l_modif,D[i],D[j],i,j,argv[22]);
+													remplir_tab(T,19,19);
+													d = distance_dyn(D[i].s,D[j].s,(D[i].taille-1),(D[j].taille-1),0.0,T);
 													push_liste(l,d,i,j);
 												}
 											}
 										}
 										ecrire_fichier_liste_fin(l,argv[21]);
-										return l_modif ;
+										ecrire_fichier_liste_fin(l,argv[22]);
+										return l;
 									}
 									
 									
