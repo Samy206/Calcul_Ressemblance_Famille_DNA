@@ -5,8 +5,8 @@
 									#include "sequence.h"
 									#include "distance.h"
 									#include "famille.h"
-									
-									
+
+
 									FAMILLE creer_famille_initiale(int nb)
 									{
 										FAMILLE f ;
@@ -14,8 +14,8 @@
 										f.n = nb ;
 										return f ;
 									}
-									
-									
+
+
 									void remplir_famille(FAMILLE f , int T[] ,SEQUENCE D[])
 									{
 										for(int i = 0 ; i < f.n ; i++)
@@ -23,11 +23,11 @@
 											f.table[i] = D[T[i]];
 										}
 									}
-									
+
 									void ecrire_fich_fam(FAMILLE f  , int T[] , char *argv)
 									{
 										FILE *F = fopen(argv,"w");
-									
+
 										fprintf(F,"La famille est [\n");
 										for(int i = 0 ; i < f.n ; i++)
 										{
@@ -35,10 +35,10 @@
 										}
 										fprintf(F,"]\n");
 										fprintf(F,"il y a %d sequences.\n\n",f.n);
-										
-										fclose(F);	
+
+										fclose(F);
 									}
-									
+
 									float recherche_distance_min(LISTE *l)
 									{
 										DISTANCE *d = l->premier ;
@@ -53,12 +53,12 @@
 										}
 										return min ;
 									}
-									
+
 									int get_num_freq_max( float distance , LISTE *l)
 									{
 										int max , cmp , numero ;
 										max = 0 ;
-										DISTANCE *e ; 
+										DISTANCE *e ;
 										for(int i  = 1 ; i < 21 ; i++)
 										{
 											e = l->premier ;
@@ -79,27 +79,31 @@
 										}
 										return numero ;
 									}
-										
-									
+
+
 									LISTE * creer_liste_initiale(SEQUENCE D[] , char ** argv)
 									{
-										float d ;
-										float **T ;
+										SEQUENCE *d ;
+										SEQUENCE *initSequence ;
+										SEQUENCE ***T ;
 										LISTE *l = initialiser_liste();
 										T = malloc(19*sizeof(float));
 										for(int i = 0 ; i < 19 ; i++ )
 										{
-											T[i] = malloc(19*sizeof(float));
+											T[i] = malloc(19*sizeof(SEQUENCE));
 										}
 										for(int i = 20 ; i >= 1 ; i--)
 										{
 											for(int j = 20 ; j >= 1 ; j--)
 											{
 												if( i != j )
-												{	
+												{
+													initSequence = malloc(sizeof(SEQUENCE));
 													remplir_tab(T,19,19);
-													d = distance_dyn(D[i].s,D[j].s,D[i].taille-1,D[j].taille-1,0.0,T);
-													push_liste(l,d,i,j);
+													d = distance_dyn(D[i].s,D[j].s,D[i].taille-1,D[j].taille-1,initSequence,T);
+													push_liste(l,d->distance,i,j);
+													free(initSequence->s);
+													free(initSequence);
 												}
 											}
 										}
@@ -108,10 +112,10 @@
 										free(T);
 										return l;
 									}
-									
-									
-									
-									
+
+
+
+
 									int get_num_autre(int *T , float distance , int numero , LISTE *l)
 									{
 										DISTANCE *e = l->premier ;
@@ -124,10 +128,10 @@
 												i++;
 											}
 											e = e->suiv ;
-										}			
+										}
 										return i ;
 									}
-										
-									
 
-									
+
+
+
