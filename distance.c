@@ -27,14 +27,14 @@
 									
 									int est_vide(LISTE *l)
 									{
-										if((l->nombre == 5 && l->premier->val == 0) || l->nombre == 5 )  //Si la première distance est vierge ou si la liste est vide on renvoie 0 sinon 1
+										if(l->nombre == 0  )  //Si la première distance est vierge ou si la liste est vide on renvoie 0 sinon 1
 										{
-											printf("la liste est vide \n");
-											return 0 ;
+											//printf("la liste est vide \n");
+											return 1 ;
 										}
 										else
 										{
-											return 1 ;
+											return 0 ;
 										}
 									}
 										
@@ -150,6 +150,7 @@
 												DISTANCE *e = d->suiv ;
 												l->premier = e ;
 												valeur = d->val ;
+												(l->nombre)--;
 												free(d);
 											}
 										}
@@ -171,7 +172,7 @@
 										}
 										
 										DISTANCE *d = l->premier ;
-										fprintf(F," La liste de distance est [ \n");
+										fprintf(F,"La liste de distance est [ \n");
 										while( d != NULL)
 										{
 											fprintf(F,"la distance entre les sequences numero %2d et numero %2d est est %f\n",d->indiceg,d->indiced,d->val);
@@ -210,7 +211,6 @@
 									{
 										if( l->nombre == 1)
 										{
-											printf("9lawi\n");
 											exit(5);
 										}
 										DISTANCE *d ;									//on entre dans toute la liste 

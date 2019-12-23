@@ -1,0 +1,6 @@
+La famille est [
+la sequence 11 est : GTTTCATCCCCTCTTTCA 
+la sequence  1 est : CTTCATCCCCTCTTTCA 
+]
+il y a 2 sequences.
+

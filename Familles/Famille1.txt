@@ -1,0 +1,8 @@
+La famille est [
+la sequence 18 est : TTCTATGGAATCTTTTTA 
+la sequence  8 est : TTCTATGGAATCTCTTTA 
+la sequence 10 est : TTCTATGGAATTTTTTTA 
+la sequence 20 est : TCCTATGGAATCTTTTTA 
+]
+il y a 4 sequences.
+

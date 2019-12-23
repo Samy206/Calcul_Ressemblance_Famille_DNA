@@ -1,0 +1,7 @@
+La famille est [
+la sequence  7 est : CTTCTCGGGAGCTATTTG 
+la sequence  9 est : CTGTCTCGGGAGCTATTTG 
+la sequence 19 est : CTTCTCGAGGAGCTATTTG 
+]
+il y a 3 sequences.
+

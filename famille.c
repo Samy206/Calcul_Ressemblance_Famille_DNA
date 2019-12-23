@@ -7,40 +7,34 @@
 									#include "famille.h"
 									
 									
-									FAMILLE * creer_famille_initiale(int nb)
+									FAMILLE creer_famille_initiale(int nb)
 									{
-										FAMILLE *f = malloc(sizeof(FAMILLE));
-										f->table = malloc(nb*sizeof(SEQUENCE));
-										f->n = nb ;
-										f->s = NULL ;
+										FAMILLE f ;
+										f.table = malloc(nb*sizeof(SEQUENCE));
+										f.n = nb ;
 										return f ;
 									}
 									
 									
-									void remplir_famille(FAMILLE *f , int T[] ,SEQUENCE D[])
+									void remplir_famille(FAMILLE f , int T[] ,SEQUENCE D[])
 									{
-										for(int i = 0 ; i < f->n ; i++)
+										for(int i = 0 ; i < f.n ; i++)
 										{
-											f->table[i] = D[T[i]];
+											f.table[i] = D[T[i]];
 										}
 									}
 									
-									void ecrire_fich_fam(FAMILLE *f  , int T[] , char *argv)
+									void ecrire_fich_fam(FAMILLE f  , int T[] , char *argv)
 									{
-										FILE *F = fopen(argv,"a");
-										if(F == NULL)
-										{
-											printf("problème d'ouverture de fichier ecriture\n");
-											exit(3);
-										}
+										FILE *F = fopen(argv,"w");
 									
-										fprintf(F," la famille est [\n");
-										for(int i = 0 ; i < f->n ; i++)
+										fprintf(F,"La famille est [\n");
+										for(int i = 0 ; i < f.n ; i++)
 										{
-											fprintf(F,"la sequence %2d est : %s \n",T[i],f->table[i].s);
+											fprintf(F,"la sequence %2d est : %s \n",T[i],f.table[i].s);
 										}
 										fprintf(F,"]\n");
-										fprintf(F,"il y a %d sequences.\n\n",f->n);
+										fprintf(F,"il y a %d sequences.\n\n",f.n);
 										
 										fclose(F);	
 									}
@@ -104,13 +98,14 @@
 												if( i != j )
 												{	
 													remplir_tab(T,19,19);
-													d = distance_dyn(D[i].s,D[j].s,(D[i].taille-1),(D[j].taille-1),0.0,T);
+													d = distance_dyn(D[i].s,D[j].s,D[i].taille-1,D[j].taille-1,0.0,T);
 													push_liste(l,d,i,j);
 												}
 											}
 										}
 										ecrire_fichier_liste_fin(l,argv[21]);
 										ecrire_fichier_liste_fin(l,argv[22]);
+										free(T);
 										return l;
 									}
 									
@@ -132,8 +127,7 @@
 										}			
 										return i ;
 									}
-									
-									
+										
 									
 
 									

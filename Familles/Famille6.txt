@@ -1,0 +1,6 @@
+La famille est [
+la sequence  4 est : CTTCACCCCCCTCTTTCA 
+la sequence  3 est : CTTCTGTCCCCTCTTTCA 
+]
+il y a 2 sequences.
+
