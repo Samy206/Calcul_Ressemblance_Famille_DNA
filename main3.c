@@ -12,7 +12,7 @@
 
 
 										SEQUENCE *d ;
-										SEQUENCE *initSequence ;
+
 										SEQUENCE ***T ;
 
 										T = malloc(19*sizeof(SEQUENCE));
@@ -21,10 +21,9 @@
 											T[i] = malloc(19*sizeof(SEQUENCE));
 										}
 										remplir_tab(T,19,19);
-										printf("println\n");
-										initSequence = malloc(sizeof(SEQUENCE));
-										printf("println\n");
-										d = distance_dyn("ACGT","AGA",4,3,initSequence,T);
+
+										d = distance_dyn("ACGT","AGA",3,2,T);
+
 										printf("%f %s %s\n", d->distance, d->a, d->b);
 										liberer_seq(d);
 

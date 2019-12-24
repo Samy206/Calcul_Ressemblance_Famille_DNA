@@ -37,7 +37,9 @@
 
 								void remplir_tab(SEQUENCE ***tab ,int ligne , int colonne);
 
-								SEQUENCE* distance_dyn(char *a , char *b , int i , int j ,SEQUENCE *current , SEQUENCE ***sequences);
+								SEQUENCE* distance_dyn(char *a , char *b , int i , int j , SEQUENCE ***sequences);
+
+								void append(SEQUENCE *d1, SEQUENCE *m, char ac, char bc);
 
 								float compare_carac(char s , char c);
 

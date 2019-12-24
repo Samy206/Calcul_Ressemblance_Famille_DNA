@@ -445,27 +445,56 @@
 										}
 									}
 
-									SEQUENCE* distance_dyn (char *a , char *b , int i , int j ,SEQUENCE *current , SEQUENCE ***sequences)
+
+void append(SEQUENCE *d, SEQUENCE *m, char ac, char bc){
+	int length;
+	printf("\t\t d a:'%s' b:'%s' ac:'%c' bc:'%c'\n", d->a,d->b, ac, bc );
+	if(d->a != NULL){
+		length = strlen(d->a);
+		m->a = malloc((length + 1) * sizeof(char));
+		for(int k = 0; k < length; k++){
+			m->a[k] = d->a[k];
+		}
+	} else {
+		m->a = malloc(1);
+		length = 0;
+	}
+	m->a[length] = ac;
+
+	if(d->b != NULL){
+		length = strlen(d->b);
+		m->b = malloc((length + 1) * sizeof(char));
+		for(int k = 0; k < length; k++){
+			m->b[k] = d->b[k];
+		}
+	} else {
+		m->b = malloc(1);
+		length = 0;
+	}
+	m->b[length] = bc;
+
+	printf("\t\t m a:'%s' b:'%s' ac:'%c' bc:'%c'\n", m->a,m->b, ac, bc );
+}
+									SEQUENCE* distance_dyn (char *a , char *b , int i , int j , SEQUENCE ***sequences)
 									{
 
 
 										SEQUENCE *d1,*d2,*d3,*m;
 										float d1V, d2V, d3V;
 										int length;
-
-										//printf("a[%d] : %c , b[%d]: %c , distance : %f , T[%d][%d] : %f \n",i,a[i],j,b[j],distance,i,j,T[i][j]);
 											if(i == 0 && j > 0)
 											{
 
 												m=malloc(sizeof(SEQUENCE));
 												m->distance = 1.5 * j;
-												m->b = malloc(1);
-												m->b[0] = a[i];
-
-												m->a = malloc(j);
-												for(int k = 0; k < j; k++){
-													m->a[k] = '-';
+												m->b = malloc(j + 1);
+												for(int k = 0; k < j + 1; k++){
+													m->b[k] = b[k];
 												}
+
+												m->a = malloc(1);
+												m->a[0] = a[0];
+
 
 												return m;
 											}
@@ -478,13 +507,12 @@
 												m->distance = 1.5 * i;
 
 
-												m->a = malloc(1 * sizeof(char));
-												m->a[0] = b[j];
-
-												m->b = malloc(i * sizeof(char));
-												for(int k = 0; k < i; k++){
-													m->b[k] = '-';
+												m->a = malloc(i + 1);
+												for(int k = 0; k < i + 1; k++){
+													m->a[k] = a[k];
 												}
+												m->b = malloc(1);
+												m->b[0] = b[0];
 
 
 												return m;
@@ -512,131 +540,36 @@
 
 											else
 											{
-
-												d1 = distance_dyn(a,b,i-1,j-1,current,sequences);
+												printf("a:'%s' b:'%s'\n", a, b);
+												d1 = distance_dyn(a,b,i-1,j-1,sequences);
 												d1V = d1->distance + compare_carac(a[i],b[j]);
 
-												d2 = distance_dyn(a,b,i,j-1,current,sequences);
+												d2 = distance_dyn(a,b,i,j-1,sequences);
 												d2V = d2->distance + compare_carac('-',b[j]);
 
-												d3 = distance_dyn(a,b,i-1,j,current,sequences);
+												d3 = distance_dyn(a,b,i-1,j,sequences);
 												d3V = d3->distance + compare_carac(a[i],'-');
 
 												m=malloc(sizeof(SEQUENCE));
 
 												if(d1V < d2V && d1V < d3V){
-
+													printf("\td1\n");
+													append(d1, m, a[i], b[j]);
 													m->distance = d1V;
-													printf("d1 %s %s\n", d1->a, d1->b);
-
-
-													if(d1->a != NULL){
-
-														length = strlen(d1->a);
-
-														m->a = malloc((length + 1) * sizeof(char));
-
-														for(int k = 1; k <= length; k++){
-															m->a[k] = d1->a[k-1];
-														}
-
-													} else {
-
-														m->a = malloc(1);
-
-													}
-
-													m->a[0] = a[i];
-
-													if(d1->b != NULL){
-														length = strlen(d1->b) ;
-														m->b = malloc((length + 1) * sizeof(char));
-														for(int k = 1; k <= length; k++){
-															m->b[k] = d1->b[k-1];
-														}
-													}else {
-														m->b = malloc(1);
-
-													}
-													m->b[0] = b[j];
-													printf("ici d1 %s %s\n", d1->a, d1->b);
-
-
-
 												} else if(d2V < d3V){
-													printf("d2 %s %s\n", d1->a, d1->b);
-
-												if(d2->a != NULL){
-
-														length = strlen(d2->a) ;
-
-														m->a = malloc((length + 1) * sizeof(char));
-
-														for(int k = 1; k <= length; k++){
-															m->a[k] = d2->a[k-1];
-														}
-
-													} else {
-
-														m->a = malloc(1);
-
-													}
-
-													m->a[0] = '-';
-
-													if(d2->b != NULL){
-														length = strlen(d2->b) ;
-														m->b = malloc((length + 1) * sizeof(char));
-														for(int k = 1; k <= length; k++){
-															m->b[k] = d2->b[k-1];
-														}
-													}else {
-														m->b = malloc(1);
-
-													}
-													m->b[0] = b[j];
+													printf("\td2\n");
+													append(d2, m,'-', b[j]);
 													m->distance = d2V;
 												} else {
-
-												printf("d2 %s %s\n", d3->a, d3->b);
-												if(d3->a != NULL){
-
-														printf("IF compare if '%s' \n", d3->a);
-														length = strlen(d3->a) ;
-
-														m->a = malloc((length + 1) * sizeof(char));
-
-														for(int k = 1; k <= length; k++){
-															m->a[k] = d3->a[k-1];
-														}
-
-													} else {
-
-														m->a = malloc(1);
-
-													}
-
-													m->a[0] = a[i];
-
-													if(d3->b != NULL){
-														length = strlen(d3->b) ;
-														m->b = malloc((length + 1) * sizeof(char));
-														for(int k = 1; k <= length; k++){
-															m->b[k] = d3->b[k-1];
-														}
-													}else {
-														m->b = malloc(1);
-
-													}
-													m->b[0] = '-';
+													printf("\td3\n");
+													append(d3, m, a[i], '-');
 													m->distance = d3V;
 												}
-
-
-
-												sequences[i][j] = m ;
+												sequences[i][j] = m;
+												printf("m a:'%s' b:'%s'\n", m->a, m->b);
 											}
 
-											return sequences[i][j] ;
+											return sequences[i][j];
 									}
+
 
