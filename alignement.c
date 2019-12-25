@@ -40,133 +40,91 @@
 									}
 
 									
-									float distance_rec(CHAINES S , int i , int j ,float distance, int *nouvelletailleA , int *nouvelletailleB , float **T)
-									{
-										float d1,d2,d3,m;
-										if(i == 0 && j > 0)
-										{	
-											//printf("i : %d , j : %d 1\n",i,j);	
-											/*for(int rep = 0 ; rep < j ; rep++)
-											{
-												S.anew[(*nouvelletailleA)+1] = '\0' ;
-												for(int k = (*nouvelletailleA) ; k > 0 ; k--)
-												{
-													S.anew[k] = S.anew[k-1] ;
-												}
-												S.anew[0] = '-' ;
-												printf("nouvelletailleA00 : %d i \n",*nouvelletailleA);
-												(*nouvelletailleA)++;
-											}*/
-											
-											return ( distance + 1.5 * j );
-										}
-												
-										else if ( j == 0 && i > 0)
-										{
-											//printf("i : %d , j : %d 2\n",i,j);
-											/*for(int rep = 0 ; rep < i ; rep++)
-											{
-												S.bnew[(*nouvelletailleB)+1] = '\0' ;
-												for(int k = (*nouvelletailleB) ; k > 0 ; k--)
-												{
-													S.bnew[k] = S.bnew[k-1] ;
-												}
-												S.bnew[0] = '-' ;
-												printf("nouvelletailleB00 : %d j \n",*nouvelletailleB);
-												(*nouvelletailleB)++;
-											}*/
-											return (distance + 1.5 *i );
-										}
-											
-										else if ( i == 0 && j == 0)
-										{
-											//printf("3 : dist = %f\n",(distance+ compare_carac(S.a[i],S.b[j])));
-											return (distance+ compare_carac(S.a[i],S.b[j])) ;	
-										}
-											
-										else if ( T[i][j] != -(1) )
-										{
-											return T[i][j] ;
-										}
-										
-										else
-										{
-											d1 = distance_rec(S,i-1,j-1,distance,nouvelletailleA,nouvelletailleB,T) + compare_carac(S.a[i],S.b[j]) ;	
-											d2 = distance_rec(S,i-1,j,distance,nouvelletailleA,nouvelletailleB,T) + compare_carac(S.a[i],'-') ;
-											d3 = distance_rec(S,i,j-1,distance,nouvelletailleA,nouvelletailleB,T) + compare_carac('-',S.b[j]) ;
-											
-											if( d1 <= d2 && d1 <= d3 )
-											{
-												m = d1 ;
+									void align (CHAINES *S , int i , int j , float **T) {
+//A diagonal arrow represents a match or mismatch, so the letter of the column and the letter 
+//of the row of the origin cell will align.
+//A horizontal or vertical arrow represents an indel. 
+//Horizontal arrows will align a gap ("-") to the letter of the row (the "side" sequence), 
+//vertical arrows will align a gap to the letter of the column (the "top" sequence).
+//If there are multiple arrows to choose from, they represent a branching of the 
+									
+									
+										float enHaut = 1000;
+										float aGauche = 1000;
+										float diag = 1000;
+							
+										do {
+											if (i > 0 && j >=0) {
+												enHaut = T[i-1][j];
+											} else {
+												enHaut = 1000;
+											}
+
+											if (j > 0&& i >=0) {
+												aGauche = T[i][j-1];
+											} else {
+												aGauche = 1000;
+											}
+											if (i > 0 && j > 0) {
+												diag = T[i-1][j-1];
+											} else {
+												diag = 1000;
 											}
 											
-											//else if( i > j )
-											//{
-												else if ( d2 < d3 && d2 <= d1 )
-												{
-													//printf("nouvelletailleB : %d (d2 , 1),",(*nouvelletailleB));
-													S.bnew[(*nouvelletailleB)+1] = '\0' ;
-													for(int k = (*nouvelletailleB) ; k > j+1; k--)
-													{
-														S.bnew[k] = S.bnew[k-1] ;
-													}													
-													S.bnew[j+1] = '-' ;
-													printf("anew : %s \nbnew : %s\n",S.anew,S.bnew);
-													(*nouvelletailleB) = (*nouvelletailleB)+1;
-													//printf(" S.bnew : %s (d2,1)\n",S.bnew);	
-													m = d2 ;
-												}
+									
+											if (enHaut < aGauche && enHaut < diag) {
+												S->bnew = prepend(S->bnew, '-'); 
+												S->anew = prepend(S->anew, S->a[i]);
+												//printf("%f %f %f %c \n", enHaut, aGauche,  diag, '-');
+
+												printf("%c\n", S->a[i]);
+												i--;
+											}
+											else if (aGauche < diag) {
+												S->bnew = prepend(S->bnew, S->b[j]); 
+												S->anew = prepend(S->anew, '-');
+												printf("%c\n", '-');
+												j--;
+											}
+											else {
 												
-												else
-												{
-													//printf("nouvelletailleA : %d (d3 , 1),",(*nouvelletailleA));												
-													S.anew[(*nouvelletailleA)+1] = '\0' ;
-													for(int k = (*nouvelletailleA) ; k > i+1 ; k--)
-													{
-														S.anew[k] = S.anew[k-1] ;
-													}	
-													S.anew[i+1] = '-' ;
-													(*nouvelletailleA) = (*nouvelletailleA)+1;
-													printf("anew : %s \nbnew : %s\n",S.anew,S.bnew);
-													//printf(" S.anew : %s (d3,1)\n",S.anew);													
-													m = d3 ;
-												}
-											//}
-											/*else 
-											{
-												if ( d3 <= d2 )
-												{
-													S.anew[(*nouvelletailleA)+1] ='\0' ;
-													//printf("nouvelletailleA : %d (d3 , 2),",(*nouvelletailleA));
-													for(int k = (*nouvelletailleA) ; k > i+1 ; k--)
-													{
-														S.anew[k] = S.anew[k-1] ;
-													}																						
-													S.anew[i+1] = '-' ;
-													(*nouvelletailleA) = (*nouvelletailleA)+1;	
-													//printf(" S.anew : %s (d3,2)\n",S.anew);
-													m = d3 ;
-												}
-												
-												else 
-												{
-													//printf("nouvelletailleB : %d (d2 , 2),",(*nouvelletailleB));
-													S.bnew[(*nouvelletailleB)+1] = '\0' ;
-													for(int k = nouvelletailleB ; k > j+1; k--)
-													{
-														S.bnew[k] = S.bnew[k-1] ;
-													}
-													S.bnew[j+1] = '-' ;
-													(*nouvelletailleB) = (*nouvelletailleB)+1;
-													//printf("S.bnew : %s (d2,2)\n",S.bnew);
-													m = d2 ;
-												}
-											}*/
-																					
-											T[i][j] = m ;
+												S->bnew = prepend(S->bnew, S->b[j]); 
+												S->anew = prepend(S->anew, S->a[i]);
+												printf("%c\n", S->a[i]);
+												i--;
+												j--;
+											}
+
 										}
-											
-										return T[i][j] ;		
+										while ( i >= 0 && j>=0 );
+
+									
 									}
-											
+
+
+
+									char * prepend(char* s, const char t)
+									{
 										
+										if (s == NULL) {
+											s = malloc(1);
+											s[0] = t;
+										} else {
+										
+											int length = strlen(s);
+											char *tmp = malloc(length + 1);
+											tmp[0] = t;
+											for(int i = 1; i < length + 1; i++) {
+												tmp[i] = s[i - 1];
+											}
+											strcpy(s, tmp);
+											//free(tmp);
+										}
+
+										
+										return s;
+									}
+
+								
+							
+																					

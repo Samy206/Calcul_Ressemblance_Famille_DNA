@@ -98,7 +98,7 @@
 												if( i != j )
 												{	
 													remplir_tab(T,19,19);
-													d = distance_dyn(D[i].s,D[j].s,D[i].taille-1,D[j].taille-1,0.0,T);
+													d = distance_dyn(D[i].s,D[j].s,D[i].taille-1,D[j].taille-1,T);
 													push_liste(l,d,i,j);
 												}
 											}

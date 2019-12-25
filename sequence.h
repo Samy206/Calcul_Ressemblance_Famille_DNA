@@ -32,7 +32,7 @@
 								
 								void remplir_tab(float **tab ,int ligne , int colonne);
 								
-								float distance_dyn (char *a , char *b , int i , int j ,float distance , float **T);
+								float distance_dyn (char *a , char *b , int i , int j, int indexA, int indexB , float **T);
 								
 								float compare_carac(char s , char c);
 								

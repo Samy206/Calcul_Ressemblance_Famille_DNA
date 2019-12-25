@@ -17,10 +17,11 @@
 						char *bnew ; //nouvelle distance b avec les blancs
 					}CHAINES;
 					
+					void align (CHAINES *S , int i , int j , float **T);
 					
-					float distance_rec(CHAINES S , int i , int j ,float distance , int *nouvelletailleA , int *nouvelletailleB , float **T);
 					
-					
+					char* prepend(char* s, const char t);
+
 					void creer_familles(char **argv,FAMILLE *f,SEQUENCE *D);
 					
 
