@@ -14,7 +14,6 @@
 										afficher_tab(D);
 										LISTE *l = creer_liste_initiale(D,argv);
 										
-										
 										int T[10] , numero , taille ;
 										float d ;
 										int i = 0 ;
@@ -38,7 +37,15 @@
 											
 										}
 									}
-
+									
+									void liberer_chaine(CHAINES S)
+									{
+										free(S.a);
+										free(S.b);
+										free(S.anew);
+										free(S.bnew);
+										free(&S);
+									}
 									
 									void align (CHAINES *S , int i , int j , float **T) {
 //A diagonal arrow represents a match or mismatch, so the letter of the column and the letter 
@@ -54,6 +61,7 @@
 										float diag = 1000;
 							
 										do {
+											//printf("i : %d , j : %d \n",i,j);
 											if (i > 0 && j >=0) {
 												enHaut = T[i-1][j];
 											} else {
@@ -77,20 +85,20 @@
 												S->anew = prepend(S->anew, S->a[i]);
 												//printf("%f %f %f %c \n", enHaut, aGauche,  diag, '-');
 
-												printf("%c\n", S->a[i]);
+												//printf("%c\n", S->a[i]);
 												i--;
 											}
 											else if (aGauche < diag) {
 												S->bnew = prepend(S->bnew, S->b[j]); 
 												S->anew = prepend(S->anew, '-');
-												printf("%c\n", '-');
+												//printf("%c\n", '-');
 												j--;
 											}
 											else {
 												
 												S->bnew = prepend(S->bnew, S->b[j]); 
 												S->anew = prepend(S->anew, S->a[i]);
-												printf("%c\n", S->a[i]);
+												//printf("%c\n", S->a[i]);
 												i--;
 												j--;
 											}
@@ -112,19 +120,125 @@
 										} else {
 										
 											int length = strlen(s);
-											char *tmp = malloc(length + 1);
+											//printf("s : %s , strlen(s) : %d \n",s,strlen(s));
+											char *tmp = malloc(length+1);
+											tmp[length+1] = '\0' ;
 											tmp[0] = t;
-											for(int i = 1; i < length + 1; i++) {
+											for(int i = 1; i < length+1 ; i++) {
 												tmp[i] = s[i - 1];
+												//printf("tmp : %s \n",tmp);
 											}
+											tmp[length+1] = '\0' ;
 											strcpy(s, tmp);
-											//free(tmp);
+											free(tmp);
 										}
 
 										
 										return s;
 									}
 
-								
-							
+									CHAINES initialiser_chaines(char *a , char*b)
+									{
+										CHAINES S ;
+										S.a = malloc(strlen(a)+1);
+										S.b = malloc(strlen(b)+1);
+										strcpy(S.a,a);
+										strcpy(S.b,b);
+										S.anew = malloc(strlen(a)+5);
+										S.bnew = malloc(strlen(b)+5);
+										
+										return S; 
+									}
+									
+									int verif_tab(int T[] , int n )
+									{
+										for(int i  = 0 ; i < n ; i++)
+										{
+											if((T[i]) != 0)
+												return 0 ;
+										}
+										return 1 ;
+									}
+									
+									ALIGNEMENT creer_alignement ( int nb )
+									{
+										ALIGNEMENT A ;
+										A.nb = nb ;
+										A.s = NULL ;
+										return A ;
+									}
+									
+									char **creer_seq(FAMILLE f)
+									{
+										char **Tab_seq = malloc(f.n*sizeof(char*));
+										int Tab_marqueur[f.n];
+										for(int i = 0 ; i < f.n ; i++)
+											Tab_marqueur[i] = 1 ;
+											
+										float minDist , d ;
+										int indiceDist ;
+										minDist = 30 ;
+										float **T = malloc(19*sizeof(float*));
+										for(int i = 0 ; i < 19 ; i++ )
+										{
+											T[i] = malloc(19*sizeof(float));
+											for(int j = 0 ; j < 19 ; j++)
+											{
+												T[i][j] = -1;
+											}
+									
+										}
+										for(int i = 1 ; i < f.n ; i++)
+										{
+											d = distance_dyn(f.table[0].s,f.table[i].s,f.table[0].taille-1,f.table[i].taille-1,T);
+											if(minDist > d)
+											{
+												minDist = d ;
+												indiceDist = i ;
+											}
+										}
+										
+										CHAINES S = initialiser_chaines(f.table[0].s,f.table[indiceDist].s);
+										align(&S,f.table[0].taille-1,f.table[indiceDist].taille-1,T);
+										Tab_seq[0] = malloc(sizeof(S.anew)+1);
+										Tab_marqueur[0] = 0 ;
+										Tab_marqueur[indiceDist] = 0 ;
+										Tab_seq[indiceDist] = malloc(sizeof(S.bnew)+1);
+										strcpy(Tab_seq[0],S.anew);
+										strcpy(Tab_seq[indiceDist],S.bnew);
+										free(&S);
+										int l = 0 ;
+										
+										while(l < f.n-2 )
+										{
+											int num = 1 ;
+											while(Tab_marqueur[num] == 0)
+												num++;
+											
+											remplir_tab(T,19,19);
+											
+											for(int i = num+1 ; i < f.n ; i++)
+											{
+												if(Tab_marqueur[i] != 0 && i != num)
+												{
+													d = distance_dyn(f.table[num].s,f.table[i].s,f.table[num].taille-1,f.table[i].taille-1,T);
+													if(minDist > d)
+													{
+														minDist = d ;
+														indiceDist = i ;
+													}
+												}
+											}
+											CHAINES S = initialiser_chaines(f.table[num].s,f.table[indiceDist].s);
+											align(&S,f.table[num].taille-1,f.table[indiceDist].taille-1,T);
+											Tab_seq[num] = malloc(sizeof(S.anew)+1);
+											Tab_marqueur[num] = 0 ;
+											Tab_marqueur[indiceDist] = 0 ;
+											Tab_seq[indiceDist] = malloc(sizeof(S.bnew)+1);
+											strcpy(Tab_seq[num],S.anew);
+											strcpy(Tab_seq[indiceDist],S.bnew);
+											free(&S);
+										}
+										return Tab_seq;
+									}
 																					

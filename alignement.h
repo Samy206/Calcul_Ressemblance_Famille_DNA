@@ -4,8 +4,7 @@
 					
 					typedef struct alignement
 					{
-						int nombre ; //nombre de séquences à aligner 
-						FAMILLE f;  //famille de sequences
+						int nb ; //nombre de séquences à aligner 
 						char *s ; // sequence consensus
 					}ALIGNEMENT;
 					
@@ -19,11 +18,17 @@
 					
 					void align (CHAINES *S , int i , int j , float **T);
 					
+					void liberer_chaine(CHAINES S);
 					
 					char* prepend(char* s, const char t);
 
 					void creer_familles(char **argv,FAMILLE *f,SEQUENCE *D);
 					
+					CHAINES initialiser_chaines(char *a , char*b);
+					
+					int verif_tab(int T[] , int n );
+					
+					ALIGNEMENT creer_alignement ( int nb );
 
 
 					#endif

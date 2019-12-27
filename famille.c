@@ -84,13 +84,13 @@
 									LISTE * creer_liste_initiale(SEQUENCE D[] , char ** argv)
 									{
 										float d ;
-										float **T ;
 										LISTE *l = initialiser_liste();
-										T = malloc(19*sizeof(float));
+										float **T = malloc(19*sizeof(float*));
 										for(int i = 0 ; i < 19 ; i++ )
 										{
 											T[i] = malloc(19*sizeof(float));
 										}
+										
 										for(int i = 20 ; i >= 1 ; i--)
 										{
 											for(int j = 20 ; j >= 1 ; j--)

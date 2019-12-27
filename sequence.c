@@ -435,37 +435,60 @@
 										{
 											for(int j = 0 ; j < colonne ; j++)
 											{
-												printf("%d %d\n", i, j);
+												//printf("%d %d\n", i, j);
 												tab[i][j] = -(1) ;
 											}
 										}
 									}
 									
-									float distance_dyn (char *a , char *b , int i , int j , int indexA, int indexB, float **T)
+									float distance_dyn (char *a , char *b , int i , int j , float **T)
 									{
+										float mini , temp;
 										if (T[i][j] != -(1) ){
 											return  T[i][j];
 										}
-										if(i == 0 && j > 0) {
-											T[i][j] = 1.5 * (j-1);
+										if(i == 0 && j > 0) 
+										{
+											//printf("i : %d , j :%d 1 \n",i,j);
+											mini = 1.5;
+											for(int k = 0 ; k < j ; k++)
+											{
+												temp = compare_carac(a[0],b[k]);
+												if(temp < mini)
+												{
+													mini = temp ;
+												}
+											}
+											T[i][j] = 1.5 * (j) + mini ;
 											return T[i][j];
 										}
 
-										if(j == 0 && i > 0) {
-											T[i][j] = 1.5 * (i-1);
+										if(j == 0 && i > 0) 
+										{
+											//printf("i : %d , j :%d 1 \n",i,j);
+											mini = 1.5;
+											for(int k = 0 ; k < i ; k++)
+											{
+												temp = compare_carac(a[0],b[k]);
+												if(temp < mini)
+												{
+													mini = temp ;
+												}
+											}
+											T[i][j] = 1.5 * (i ) + mini;
 											return T[i][j];
 										}
 										if(j == 0 && i == 0) {
 							
-											T[i][j] = compare_carac(a[indexA],b[indexB]);
+											T[i][j] = compare_carac(a[i],b[j]);
 											return T[i][j];
 										}
 									
 										//printf("distance_dyn %d %d %f\n", i, j, T[i][j]);
 										float d1,d2,d3;
-										d1 = distance_dyn(a,b,i-1,j-1,indexA-1,indexB-1,T) + compare_carac(a[indexA],b[indexB]) ;
-										d2 = distance_dyn(a,b,i-1,j,indexA-1,indexB,T) + compare_carac(a[indexA],'-') ;
-										d3 = distance_dyn(a,b,i,j-1,indexA,indexB-1,T) + compare_carac('-',b[indexB]) ;
+										d1 = distance_dyn(a,b,i-1,j-1,T) + compare_carac(a[i],b[j]) ;
+										d2 = distance_dyn(a,b,i-1,j,T) + compare_carac(a[i],'-') ;
+										d3 = distance_dyn(a,b,i,j-1,T) + compare_carac('-',b[j]) ;
 												
 										T[i][j] = min(min(d1,d2),d3);	
 										return T[i][j] ;		
