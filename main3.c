@@ -49,18 +49,18 @@
 
 										align (&S,D[13].taille-1 ,D[2].taille-1, T);
 										printf("anew : %s \nbnew : %s\n, distance : %f \n",S.anew,S.bnew,d);*/
-										int T[f[3].n];
-										for(int i = 0 ; i < f[3].n ; i++){
+										int T[f[2].n];
+										for(int i = 0 ; i < f[2].n ; i++){
 												T[i] = 0 ;
 											}
-										char **Sek;	
-										Sek = malloc(f.n*sizeof(char*));
-										//INDICES ij= align_two(Sek,f[1],T);
+										char **Sek  = { { 0 } };
+										Sek = malloc(f[2].n*sizeof(char*));
 										
 									
-										aligne_famille(Sek,f[3],T);	
+										aligne_famille(Sek,f[2],T);	
 
-										for (int i= 0 ; i<f[3].n; i++){
+										
+										for (int i= 0 ; i<f[2].n; i++){
 											printf("%s\n" , Sek[i]);
 										}
 

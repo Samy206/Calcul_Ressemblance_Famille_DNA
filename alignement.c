@@ -104,7 +104,6 @@ void align (CHAINES *S , int i , int j , float **T) {
 	}
 	while ( i >= 0 && j>=0 );
 
-
 }
 
 
@@ -232,21 +231,27 @@ void init_and_call_align (char *chaine1,
 	CHAINES S = initialiser_chaines(chaine1, chaine2);	
 	align(&S,taille1,taille2,matrice);
 
-	printf("%s %s \n", S.anew, S.bnew);
-	/*if (Tab_marqueur[indiceDistg] == 0){
-		Tab_seq[indiceDistg] = malloc(sizeof(strlen(S.anew))+1);
+	if (Tab_marqueur[indiceDistg] == 0){
+		Tab_seq[indiceDistg] = malloc(strlen(S.anew));
+		for (int i =0 ; i< strlen(S.anew); i++){
+			Tab_seq[indiceDistg][i] = S.anew[i];
+		}
+		Tab_seq[indiceDistg][strlen(S.anew)] = '\0';
 		strcpy(Tab_seq[indiceDistg],S.anew);
-		printf("%d, %s\n", indiceDistg, Tab_seq[indiceDistg]);
+		
+		//Tab_seq[indiceDistg][strlen(S.anew)] = '\0';
 	}
 		
 	if (Tab_marqueur[indiceDistd] == 0){
-		Tab_seq[indiceDistd] = malloc(sizeof(strlen(S.bnew))+1);
+		Tab_seq[indiceDistd] = malloc(sizeof(strlen(S.bnew))+100);
+		//Tab_seq[indiceDistd][0] = '\0';
 		strcpy(Tab_seq[indiceDistd],S.bnew);
-		printf("%d, %s\n", indiceDistd, Tab_seq[indiceDistd]);
-	}	*/
+		//Tab_seq[indiceDistg][strlen(S.bnew)] = '\0';
+	}	
 	
 	Tab_marqueur[indiceDistg] = 1 ;
 	Tab_marqueur[indiceDistd] = 1 ;
+	liberer_chaine(S);
 }
 
 
