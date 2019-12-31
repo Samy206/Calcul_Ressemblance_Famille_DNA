@@ -1,9 +1,6 @@
 La famille est [
-la sequence 14 est : TTTTGTAGAAGTACATTAA 
-la sequence  5 est : CTTTGTAGAGGTACATTAA 
-la sequence 13 est : TTTTGTAGAAGAACATTAA 
-la sequence 16 est : TTTTGTAGAAGTTCATTAA 
-la sequence 17 est : ATTTGTAGAAGTACATTAA 
+la sequence 11 est : GTTTCATCCCCTCTTTCA 
+la sequence  1 est : CTTCATCCCCTCTTTCA 
 ]
-il y a 5 sequences.
+il y a 2 sequences.
 

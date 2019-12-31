@@ -459,7 +459,7 @@
 													mini = temp ;
 												}
 											}
-											T[i][j] = 1.5 * (j) + mini ;
+											T[i][j] = 1.5 * (j-1) + mini ;
 											return T[i][j];
 										}
 
@@ -475,7 +475,7 @@
 													mini = temp ;
 												}
 											}
-											T[i][j] = 1.5 * (i ) + mini;
+											T[i][j] = 1.5 * (i-1 ) + mini;
 											return T[i][j];
 										}
 										if(j == 0 && i == 0) {

@@ -26,9 +26,10 @@
 					
 					CHAINES initialiser_chaines(char *a , char*b);
 					
-					int verif_tab(int T[] , int n );
 					
 					ALIGNEMENT creer_alignement ( int nb );
+					
+					char **creer_deux_seq(char **Tab_seq , FAMILLE f);
 
 
 					#endif

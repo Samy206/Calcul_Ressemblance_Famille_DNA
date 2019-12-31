@@ -1,8 +1,9 @@
 La famille est [
-la sequence 15 est : GCCACTGAAAACCTCCCG 
-la sequence  2 est : GCCACTAAAAACCTTCCG 
-la sequence  6 est : GCCACTCAAAACCTCCCG 
-la sequence 12 est : GCCACTGAAAACATCCCG 
+la sequence 14 est : TTTTGTAGAAGTACATTAA 
+la sequence  5 est : CTTTGTAGAGGTACATTAA 
+la sequence 13 est : TTTTGTAGAAGAACATTAA 
+la sequence 16 est : TTTTGTAGAAGTTCATTAA 
+la sequence 17 est : ATTTGTAGAAGTACATTAA 
 ]
-il y a 4 sequences.
+il y a 5 sequences.
 
