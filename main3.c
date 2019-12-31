@@ -15,7 +15,7 @@
 										SEQUENCE D[21];
 										
 										creer_familles(argv,f,D);
-										CHAINES S ;
+										//CHAINES S ;
 										/*S.a = malloc(strlen(D[13].s));
 										S.b = malloc(strlen(D[2].s));
 										strcpy(S.a,D[13].s);
@@ -49,11 +49,21 @@
 
 										align (&S,D[13].taille-1 ,D[2].taille-1, T);
 										printf("anew : %s \nbnew : %s\n, distance : %f \n",S.anew,S.bnew,d);*/
-										char **Sek = creer_deux_seq(Sek,f[1]);
+										int T[f[3].n];
+										for(int i = 0 ; i < f[3].n ; i++){
+												T[i] = 0 ;
+											}
+										char **Sek;	
+										Sek = malloc(f.n*sizeof(char*));
+										//INDICES ij= align_two(Sek,f[1],T);
 										
-						
-											
-											
+									
+										aligne_famille(Sek,f[3],T);	
+
+										for (int i= 0 ; i<f[3].n; i++){
+											printf("%s\n" , Sek[i]);
+										}
+
 										exit(0);
 									}
 

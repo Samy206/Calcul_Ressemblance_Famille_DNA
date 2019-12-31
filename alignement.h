@@ -15,6 +15,12 @@
 						char *anew ; //nouvelle distance a avec les blancs 
 						char *bnew ; //nouvelle distance b avec les blancs
 					}CHAINES;
+
+					typedef struct indices
+					{
+						int indiceG;
+						int indiceD;
+					}INDICES;
 					
 					void align (CHAINES *S , int i , int j , float **T);
 					
@@ -26,10 +32,25 @@
 					
 					CHAINES initialiser_chaines(char *a , char*b);
 					
-					
+					float ** init_matrice_dyn(int n);
+
+					float **copyTab(float ** source);
+
+					void init_and_call_align (char *chaine1,
+ 												char *chaine2,
+ 												int taille1,
+ 												int taille2, 
+ 												float **matrice,
+ 												int Tab_marqueur [],
+ 												char **Tab_seq,
+												int indiceDistg,
+ 												int indiceDistd
+											 );
+
 					ALIGNEMENT creer_alignement ( int nb );
 					
-					char **creer_deux_seq(char **Tab_seq , FAMILLE f);
-
+					INDICES align_two(char **Tab_seq , FAMILLE f,int Tab_marqueur[]);
+					
+					void aligne_famille(char **Tab_seq , FAMILLE f, int Tab_marqueur[]);
 
 					#endif
