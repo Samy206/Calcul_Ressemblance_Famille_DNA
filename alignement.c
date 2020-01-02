@@ -297,4 +297,78 @@ void aligne_famille(char **Tab_seq , FAMILLE f, int Tab_marqueur[])
 		dist_min = 10000;
 
 	}
-}				
+}
+
+char freq_majoritaire(int Freq[], int nb_seq)
+{
+	for(int l = 0 ; l < 5 ; l++)
+	{
+		if(Freq[l] > (nb_seq/2))
+		{
+			if(l == 0)
+				return 'A';
+			else if(l == 1)
+				return 'C';
+			else if(l == 2)
+				return 'G';
+			else if(l == 3)
+				return 'T';
+			else 
+				return '-';
+		}
+	}
+	return '.' ;
+}
+
+
+char * creer_seq_consensus (char **Tab_seq , int nb_seq)
+{	
+	int taillemax = 0 ;
+	for(int i = 0 ; i < nb_seq ; i++)
+	{
+		if(taillemax < strlen(Tab_seq[i]))
+		{
+			taillemax = strlen(Tab_seq[i]) ;
+		}
+	}
+	char * consensus = malloc(taillemax);
+	int Freq[5];
+	for(int k = 0 ; k < 5 ; k++)
+	{
+		Freq[k] = 0 ;
+	}
+
+	for(int letter = 0 ; letter < taillemax; letter++)
+	{
+		for(int seqNum = 0 ; seqNum < nb_seq ; seqNum++)
+		{
+			if (strlen(Tab_seq[seqNum]) > letter) {
+				char seq_letter = Tab_seq[seqNum][letter];
+				if(seq_letter == 'A')
+					Freq[0]++;
+
+				else if(seq_letter == 'C')
+					Freq[1]++;
+
+				else if(seq_letter == 'G')
+					Freq[2]++;
+
+				else if(seq_letter == 'T')
+					Freq[3]++;
+
+				else 
+					Freq[4]++;
+			}
+			else 
+				Freq[4]++;								
+		}
+		consensus[letter]= freq_majoritaire(Freq, nb_seq);
+		//init Freq for next call
+		for(int k = 0 ; k < 5 ; k++)
+		{
+			Freq[k] = 0 ;
+		}
+	}
+	consensus[taillemax] = '\0';
+	return consensus;
+}

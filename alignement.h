@@ -53,4 +53,8 @@
 					
 					void aligne_famille(char **Tab_seq , FAMILLE f, int Tab_marqueur[]);
 
+					char freq_majoritaire(int T[], int nb_seq);
+
+					char * creer_seq_consensus (char **Tab_seq , int nb_seq);
+
 					#endif
