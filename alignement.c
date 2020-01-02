@@ -7,31 +7,42 @@
 #include "alignement.h"
 #include "famille.h"
 
+char * familleFileName(int i) 
+{
+	char iToChar[2];
+	sprintf(iToChar, "%s%d","" , i);
+	char *famillefileName = malloc(23);
+	strcpy(famillefileName, "Familles/famille");
+	strcat(famillefileName, iToChar);
+	strcat(famillefileName, ".txt");
+	return famillefileName;
+}
 
 void creer_familles(char **argv , FAMILLE *f , SEQUENCE *D)
 {
-	initialiser_tab_seq(D,argv);
-	afficher_tab(D);
-	LISTE *l = creer_liste_initiale(D,argv);
-	
+	initialiser_tab_seq(D,argv[1]);
+	LISTE *l = creer_liste_initiale(D,argv[2], argv[3]);
+	//afficher_liste(l);
 	int T[10] , numero , taille ;
 	float d ;
 	int i = 0 ;
 	while(!est_vide(l))
 	{
+		printf("restant : %d\n",l -> nombre);
 		d = recherche_distance_min(l);
 		numero  = get_num_freq_max(d,l);
 		T[0] = numero  ;
 		taille =get_num_autre(T,d,numero,l);
 		f[i] = creer_famille_initiale(taille);
 		remplir_famille(f[i],T,D);
-		ecrire_fich_fam(f[i],T,argv[23+i]);
+		char *famillefileName = familleFileName(i);
+		ecrire_fich_fam(f[i],T,famillefileName);
 
 		for(int j = 0 ; j < taille ; j++)
 		{
 			supp_numero_seq(l,T[j]);
 		}
-		ecrire_fichier_liste_fin(l,argv[22]);		
+		ecrire_fichier_liste_fin(l,argv[3]);	
 		i++;				
 	}
 }
@@ -163,7 +174,7 @@ ALIGNEMENT creer_alignement ( int nb )
 	return A ;
 }
 
-INDICES align_two(char **Tab_seq , FAMILLE f, int Tab_marqueur[])
+void align_two(char **Tab_seq , FAMILLE f, int Tab_marqueur[])
 {
 	float minDist , d ;
 	INDICES Indices ;
@@ -200,8 +211,7 @@ INDICES align_two(char **Tab_seq , FAMILLE f, int Tab_marqueur[])
 		Tab_seq,
 		Indices.indiceG,
 		Indices.indiceD
-	);		
-	return Indices;								
+	);									
 }
 
 float **copyTab(float ** source)
@@ -239,14 +249,11 @@ void init_and_call_align (char *chaine1,
 		Tab_seq[indiceDistg][strlen(S.anew)] = '\0';
 		strcpy(Tab_seq[indiceDistg],S.anew);
 		
-		//Tab_seq[indiceDistg][strlen(S.anew)] = '\0';
 	}
 		
 	if (Tab_marqueur[indiceDistd] == 0){
 		Tab_seq[indiceDistd] = malloc(sizeof(strlen(S.bnew))+100);
-		//Tab_seq[indiceDistd][0] = '\0';
 		strcpy(Tab_seq[indiceDistd],S.bnew);
-		//Tab_seq[indiceDistg][strlen(S.bnew)] = '\0';
 	}	
 	
 	Tab_marqueur[indiceDistg] = 1 ;
@@ -257,7 +264,7 @@ void init_and_call_align (char *chaine1,
 
 void aligne_famille(char **Tab_seq , FAMILLE f, int Tab_marqueur[])
 {
-	INDICES Indices = align_two(Tab_seq,f,Tab_marqueur);
+	align_two(Tab_seq,f,Tab_marqueur);
 	float dist ;
 	float dist_min = 10000;
 	float ** matriceMin;
@@ -299,11 +306,37 @@ void aligne_famille(char **Tab_seq , FAMILLE f, int Tab_marqueur[])
 	}
 }
 
+int max_tab(int Freq[])
+{
+	int max = 0 ;
+	for(int i = 0 ; i< 5 ; i++)
+	{
+		if(Freq[i] > max)
+			max = Freq[i];			
+	}
+	return max ;
+}
+
+int isMaxDuplicate(int Freq[], int max) {
+	int count =0; 
+	for(int i = 0 ; i< 5 ; i++)
+	{
+		if(Freq[i]== max )
+		{
+			count++;
+		}
+			
+	}
+	return (count > 1);
+}
+
+
 char freq_majoritaire(int Freq[], int nb_seq)
 {
 	for(int l = 0 ; l < 5 ; l++)
 	{
-		if( ((nb_seq/2 == 0) && Freq[l] > nb_seq/2) || (((nb_seq/2) != 0)  && Freq[l] >= nb_seq/2))
+		int max = max_tab(Freq);
+		if( Freq[l] == max && isMaxDuplicate(Freq, max) == 0 )
 		{
 			if(l == 0)
 				return 'A';
@@ -372,4 +405,11 @@ char * creer_seq_consensus (char **Tab_seq , int nb_seq)
 	}
 	consensus[taillemax] = '\0';
 	return consensus;
+}
+
+void ecrire_seq_consensus_fichier(char *consensus , char *argv)
+{
+	FILE * F = fopen(argv,"a");
+	fprintf(F,"\n\nLa sequence consensus de cette famille est : %s\n",consensus);
+	fclose(F);
 }

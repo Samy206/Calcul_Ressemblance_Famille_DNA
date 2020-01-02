@@ -26,38 +26,51 @@
 										return t ;
 									}
 									
-									char * lire_fichier(char *argv)
+									char * lire_fichier(char *argv, int num)
 									{
 										FILE *F ;
-										F = fopen(argv,"r");						
+										
+										char seqNum[3] ;
+										if (num >=10) {
+											seqNum[0]= (num/10)+'0';
+											seqNum[1]= (num%10)+'0';
+											seqNum[2]= '\0';
+										}
+										else {
+											seqNum[0]= '0';
+											seqNum[1]= num+'0';
+											seqNum[2]= '\0';
+										}
+										const int len = strlen(argv)+11;
+										char *fileName = malloc(len);
+										strcpy(fileName, argv);
+										strcat(fileName, "/seq"),
+										strcat(fileName,seqNum);
+										strcat(fileName,".txt");
+										F = fopen(fileName,"r");						
 										if(F == NULL)
 										{
 											printf("Problème d'ouverture fichier %s\n",argv);
 											exit(1);
 										}
-										int t = get_taille_seq(argv);
+										int t = get_taille_seq(fileName);
 										char *s ;
-										s = malloc(t);
+										s = malloc(t+1);
 										fscanf(F,"%s",s); 			 //enregistrement de la séquence dans s
 										fclose(F);
+										s[t+1]='\0';
 										return s;
 									}
-									
-									SEQUENCE initialiser_sequence ( char * argv1)
-									{
-										SEQUENCE A ;
-										A.taille = get_taille_seq(argv1) ;		//On définit la taille de la séquence								
-										A.s = lire_fichier(argv1);				//On copie la chaîne de caractères dans la séquence
-										return A ;
-									}
-									
 																		
-									void initialiser_tab_seq (SEQUENCE D[] , char ** argv)
+									void initialiser_tab_seq (SEQUENCE D[] , char * argv)
 									{
 										
 										for(int i = 1 ; i <21 ; i++)
 										{
-											D[i] = initialiser_sequence(argv[i]);    //On stocke les 20 séquences dans un tableau
+											SEQUENCE A ;
+											A.s = lire_fichier(argv, i);
+											A.taille = strlen(A.s);
+											D[i] = A;    //On stocke les 20 séquences dans un tableau
 										}
 									}
 									
@@ -435,7 +448,7 @@
 										{
 											for(int j = 0 ; j < colonne ; j++)
 											{
-												//printf("%d %d\n", i, j);
+
 												tab[i][j] = -(1) ;
 											}
 										}
@@ -449,7 +462,6 @@
 										}
 										if(i == 0 && j > 0) 
 										{
-											//printf("i : %d , j :%d 1 \n",i,j);
 											mini = 1.5;
 											for(int k = 0 ; k < j ; k++)
 											{
@@ -465,7 +477,6 @@
 
 										if(j == 0 && i > 0) 
 										{
-											//printf("i : %d , j :%d 1 \n",i,j);
 											mini = 1.5;
 											for(int k = 0 ; k < i ; k++)
 											{
@@ -484,7 +495,6 @@
 											return T[i][j];
 										}
 									
-										//printf("distance_dyn %d %d %f\n", i, j, T[i][j]);
 										float d1,d2,d3;
 										d1 = distance_dyn(a,b,i-1,j-1,T) + compare_carac(a[i],b[j]) ;
 										d2 = distance_dyn(a,b,i-1,j,T) + compare_carac(a[i],'-') ;

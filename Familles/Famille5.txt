@@ -1,8 +1,9 @@
 La famille est [
-la sequence 15 est : GCCACTGAAAACCTCCCG 
-la sequence  2 est : GCCACTAAAAACCTTCCG 
-la sequence  6 est : GCCACTCAAAACCTCCCG 
-la sequence 12 est : GCCACTGAAAACATCCCG 
+la sequence  4 est : CTTCACCCCCCTCTTTCA 
+la sequence  3 est : CTTCTGTCCCCTCTTTCA 
 ]
-il y a 4 sequences.
+il y a 2 sequences.
 
+
+
+La sequence consensus de cette famille est : CTTC...CCCC..CTTTCA

@@ -12,11 +12,11 @@
 								
 								int get_taille_seq(char *argv);
 								
-								char * lire_fichier( char *argv);								
+								char * lire_fichier(char *argv, int num);								
 								
-								SEQUENCE  initialiser_sequence(char *argv1 );
+								//SEQUENCE  initialiser_sequence(char *argv1 );
 								
-								void initialiser_tab_seq (SEQUENCE D[] , char ** argv);
+								void initialiser_tab_seq (SEQUENCE D[] , char * argv);
 								
 								float distance_sequence_sans_insertions( SEQUENCE  A, SEQUENCE B);
 								

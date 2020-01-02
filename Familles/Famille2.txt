@@ -1,7 +1,9 @@
 La famille est [
-la sequence  7 est : CTTCTCGGGAGCTATTTG 
-la sequence  9 est : CTGTCTCGGGAGCTATTTG 
-la sequence 19 est : CTTCTCGAGGAGCTATTTG 
+la sequence 11 est : GTTTCATCCCCTCTTTCA 
+la sequence  1 est : CTTCATCCCCTCTTTCA 
 ]
-il y a 3 sequences.
+il y a 2 sequences.
 
+
+
+La sequence consensus de cette famille est : ..TTCATCCCCTCTTTCA

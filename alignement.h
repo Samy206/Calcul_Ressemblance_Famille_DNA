@@ -28,6 +28,8 @@
 					
 					char* prepend(char* s, const char t);
 
+					char * familleFileName(int i);
+					 
 					void creer_familles(char **argv,FAMILLE *f,SEQUENCE *D);
 					
 					CHAINES initialiser_chaines(char *a , char*b);
@@ -49,12 +51,16 @@
 
 					ALIGNEMENT creer_alignement ( int nb );
 					
-					INDICES align_two(char **Tab_seq , FAMILLE f,int Tab_marqueur[]);
+					void align_two(char **Tab_seq , FAMILLE f,int Tab_marqueur[]);
 					
 					void aligne_famille(char **Tab_seq , FAMILLE f, int Tab_marqueur[]);
 
 					char freq_majoritaire(int T[], int nb_seq);
 
 					char * creer_seq_consensus (char **Tab_seq , int nb_seq);
+
+					int max_tab(int Freq[]);
+
+					void ecrire_seq_consensus_fichier(char *consensus , char *argv);
 
 					#endif

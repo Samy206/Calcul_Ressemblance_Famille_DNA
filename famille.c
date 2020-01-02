@@ -81,7 +81,7 @@
 									}
 										
 									
-									LISTE * creer_liste_initiale(SEQUENCE D[] , char ** argv)
+									LISTE * creer_liste_initiale(SEQUENCE D[] , char* listSeq, char* distSequence)
 									{
 										float d ;
 										LISTE *l = initialiser_liste();
@@ -103,8 +103,8 @@
 												}
 											}
 										}
-										ecrire_fichier_liste_fin(l,argv[21]);
-										ecrire_fichier_liste_fin(l,argv[22]);
+										ecrire_fichier_liste_fin(l, listSeq);
+										ecrire_fichier_liste_fin(l, distSequence);
 										free(T);
 										return l;
 									}

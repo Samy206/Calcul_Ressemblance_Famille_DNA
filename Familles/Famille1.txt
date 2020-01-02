@@ -1,8 +1,10 @@
 La famille est [
-la sequence 18 est : TTCTATGGAATCTTTTTA 
-la sequence  8 est : TTCTATGGAATCTCTTTA 
-la sequence 10 est : TTCTATGGAATTTTTTTA 
-la sequence 20 est : TCCTATGGAATCTTTTTA 
+la sequence  7 est : CTTCTCGGGAGCTATTTG 
+la sequence  9 est : CTGTCTCGGGAGCTATTTG 
+la sequence 19 est : CTTCTCGAGGAGCTATTTG 
 ]
-il y a 4 sequences.
+il y a 3 sequences.
 
+
+
+La sequence consensus de cette famille est : CTTTCTCGGGAGCTATTTG

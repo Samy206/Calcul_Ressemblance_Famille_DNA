@@ -20,20 +20,16 @@
 											{
 													Tab_marqueur[j] = 0 ;
 											}
-
 											char ** Sek = malloc(f[i].n*sizeof(char*));
-
 											aligne_famille(Sek,f[i],Tab_marqueur);	
-											for (int x= 0 ; x<f[i].n; x++){
-												printf("%s %d\n" , Sek[x], x);
-											}
 
-
-											char *con = creer_seq_consensus (Sek , f[i].n);
+											/*for (int u= 0; u<f[i].n ; u++){
+												printf("Sek %s\n", Sek[u]);
+											}*/
 											
-											printf("%s\n" , con);
-
-											printf("\n\n\n");
+											char *con = creer_seq_consensus (Sek , f[i].n);
+											char * fileName = familleFileName(i);
+											ecrire_seq_consensus_fichier(con, fileName);
 											free(Sek);
 											free(con);
 										}
