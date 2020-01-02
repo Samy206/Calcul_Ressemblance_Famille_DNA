@@ -303,7 +303,7 @@ char freq_majoritaire(int Freq[], int nb_seq)
 {
 	for(int l = 0 ; l < 5 ; l++)
 	{
-		if(Freq[l] > (nb_seq/2))
+		if( ((nb_seq/2 == 0) && Freq[l] > nb_seq/2) || (((nb_seq/2) != 0)  && Freq[l] >= nb_seq/2))
 		{
 			if(l == 0)
 				return 'A';
@@ -362,6 +362,7 @@ char * creer_seq_consensus (char **Tab_seq , int nb_seq)
 			else 
 				Freq[4]++;								
 		}
+		//printf("%c new char", freq_majoritaire(Freq, nb_seq));
 		consensus[letter]= freq_majoritaire(Freq, nb_seq);
 		//init Freq for next call
 		for(int k = 0 ; k < 5 ; k++)

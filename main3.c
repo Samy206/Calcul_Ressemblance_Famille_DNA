@@ -13,23 +13,31 @@
 										SEQUENCE D[21];
 										
 										creer_familles(argv,f,D);
-										int T[f[3].n];
-										for(int i = 0 ; i < f[3].n ; i++){
-												T[i] = 0 ;
+										for(int i = 0 ; i < 6 ; i++)
+										{
+											int Tab_marqueur[f[i].n];
+											for(int j = 0 ; j < f[i].n ; j++)
+											{
+													Tab_marqueur[j] = 0 ;
 											}
-										char **Sek  = { { 0 } };
-										Sek = malloc(f[3].n*sizeof(char*));
-										
-									
-										aligne_famille(Sek,f[3],T);	
 
-										
-										for (int i= 0 ; i<f[3].n; i++){
-											printf("%s\n" , Sek[i]);
+											char ** Sek = malloc(f[i].n*sizeof(char*));
+
+											aligne_famille(Sek,f[i],Tab_marqueur);	
+											for (int x= 0 ; x<f[i].n; x++){
+												printf("%s %d\n" , Sek[x], x);
+											}
+
+
+											char *con = creer_seq_consensus (Sek , f[i].n);
+											
+											printf("%s\n" , con);
+
+											printf("\n\n\n");
+											free(Sek);
+											free(con);
 										}
 
-										char *con = creer_seq_consensus (Sek , f[3].n);
-										printf("%s\n" , con);
 
 										exit(0);
 									}
