@@ -6,6 +6,16 @@
 									#include "distance.h"
 									#include "famille.h"
 									
+									char * famille_fileName(int i) 
+									{
+										char iToChar[2];
+										sprintf(iToChar, "%s%d","" , i);
+										char *famillefileName = malloc(23);
+										strcpy(famillefileName, "Familles/famille");
+										strcat(famillefileName, iToChar);
+										strcat(famillefileName, ".txt");
+										return famillefileName;
+									}
 									
 									FAMILLE creer_famille_initiale(int nb)
 									{

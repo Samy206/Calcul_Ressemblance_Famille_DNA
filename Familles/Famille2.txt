@@ -4,6 +4,11 @@ la sequence  1 est : CTTCATCCCCTCTTTCA
 ]
 il y a 2 sequences.
 
+Les sequences apres alignement sont : 
+GTTTCATCCCCTCTTTCA
+C-TTCATCCCCTCTTTCA
+
+
 
 
 La sequence consensus de cette famille est : ..TTCATCCCCTCTTTCA

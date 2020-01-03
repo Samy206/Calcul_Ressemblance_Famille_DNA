@@ -28,7 +28,8 @@
 											}*/
 											
 											char *con = creer_seq_consensus (Sek , f[i].n);
-											char * fileName = familleFileName(i);
+											char * fileName = famille_fileName(i);
+											ecrire_seq_alignee(Sek,fileName,f[i].n);
 											ecrire_seq_consensus_fichier(con, fileName);
 											free(Sek);
 											free(con);

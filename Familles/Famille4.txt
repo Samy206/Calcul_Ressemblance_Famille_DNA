@@ -6,6 +6,13 @@ la sequence 12 est : GCCACTGAAAACATCCCG
 ]
 il y a 4 sequences.
 
+Les sequences apres alignement sont : 
+GCCACTGAAAACCTCCCG
+GCCACTAAAAACCTTCCG
+GCCACTCAAAACCTCCCG
+GCCACTGAAAACATCCCG
+
+
 
 
 La sequence consensus de cette famille est : GCCACTGAAAACCTCCCG

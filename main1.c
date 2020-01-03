@@ -6,25 +6,30 @@
 							
 							int main(int argc , char **argv)
 							{
-								float distance ;
+								float d ;
 								LISTE *l = initialiser_liste();
+								SEQUENCE D[21];
+								initialiser_tab_seq(D,argv[1]);
+								float **T = malloc(19*sizeof(float*));
+								for(int i = 0 ; i < 19 ; i++ )
+								{
+									T[i] = malloc(19*sizeof(float));
+								}
+										
 								for(int i = 20 ; i >= 1 ; i--)
 								{
-									SEQUENCE *A = initialiser_sequence(argv[i]);
 									for(int j = 20 ; j >= 1 ; j--)
 									{
-										if(i != j)
-										{
-												SEQUENCE *B = initialiser_sequence(argv[j]);
-												distance = distance_sequence_avec_insertions(A,B);
-												push_liste(l,distance,get_indice(argv[i]),get_indice(argv[j]));
-												liberer_seq(B);	
+										if( i != j )
+										{	
+											remplir_tab(T,19,19);
+											d = distance_dyn(D[i].s,D[j].s,D[i].taille-1,D[j].taille-1,T);
+											push_liste(l,d,i,j);
+											}
 										}
 									}
-									liberer_seq(A);
-								}
-	
-								ecrire_fichier_liste_fin(l,argv[21]);
+								ecrire_fichier_liste_fin(l,"partie1-Liste_distances");
+								free(T);
 								
 								exit(0);
 							}

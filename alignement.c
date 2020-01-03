@@ -7,36 +7,23 @@
 #include "alignement.h"
 #include "famille.h"
 
-char * familleFileName(int i) 
-{
-	char iToChar[2];
-	sprintf(iToChar, "%s%d","" , i);
-	char *famillefileName = malloc(23);
-	strcpy(famillefileName, "Familles/famille");
-	strcat(famillefileName, iToChar);
-	strcat(famillefileName, ".txt");
-	return famillefileName;
-}
-
 void creer_familles(char **argv , FAMILLE *f , SEQUENCE *D)
 {
 	initialiser_tab_seq(D,argv[1]);
 	LISTE *l = creer_liste_initiale(D,argv[2], argv[3]);
-	//afficher_liste(l);
 	int T[10] , numero , taille ;
 	float d ;
 	int i = 0 ;
 	while(!est_vide(l))
 	{
-		printf("restant : %d\n",l -> nombre);
 		d = recherche_distance_min(l);
 		numero  = get_num_freq_max(d,l);
 		T[0] = numero  ;
 		taille =get_num_autre(T,d,numero,l);
 		f[i] = creer_famille_initiale(taille);
 		remplir_famille(f[i],T,D);
-		char *famillefileName = familleFileName(i);
-		ecrire_fich_fam(f[i],T,famillefileName);
+		char *fileName = famille_fileName(i);
+		ecrire_fich_fam(f[i],T,fileName);
 
 		for(int j = 0 ; j < taille ; j++)
 		{
@@ -317,7 +304,8 @@ int max_tab(int Freq[])
 	return max ;
 }
 
-int isMaxDuplicate(int Freq[], int max) {
+int freq_max_duplicate(int Freq[], int max) 
+{
 	int count =0; 
 	for(int i = 0 ; i< 5 ; i++)
 	{
@@ -336,7 +324,7 @@ char freq_majoritaire(int Freq[], int nb_seq)
 	for(int l = 0 ; l < 5 ; l++)
 	{
 		int max = max_tab(Freq);
-		if( Freq[l] == max && isMaxDuplicate(Freq, max) == 0 )
+		if( Freq[l] == max && freq_max_duplicate(Freq, max) == 0 )
 		{
 			if(l == 0)
 				return 'A';
@@ -411,5 +399,18 @@ void ecrire_seq_consensus_fichier(char *consensus , char *argv)
 {
 	FILE * F = fopen(argv,"a");
 	fprintf(F,"\n\nLa sequence consensus de cette famille est : %s\n",consensus);
+	fclose(F);
+}
+
+void ecrire_seq_alignee(char ** Tab_seq,char *fileName,int nb)
+{
+	FILE *F = fopen(fileName,"a");
+
+	fprintf(F,"Les sequences apres alignement sont : \n");
+	for(int i =0 ; i < nb ;i++ )
+	{
+		fprintf(F,"%s\n",Tab_seq[i]);
+	}
+	fprintf(F,"\n\n");
 	fclose(F);
 }

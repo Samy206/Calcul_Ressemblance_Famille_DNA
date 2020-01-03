@@ -28,11 +28,13 @@
 					
 					char* prepend(char* s, const char t);
 
-					char * familleFileName(int i);
-					 
+					void ecrire_seq_alignee(char ** Tab_seq,char *fileName,int nb);
+
 					void creer_familles(char **argv,FAMILLE *f,SEQUENCE *D);
 					
 					CHAINES initialiser_chaines(char *a , char*b);
+
+					int freq_max_duplicate(int Freq[], int max);
 					
 					float ** init_matrice_dyn(int n);
 

@@ -8,13 +8,11 @@
 									
 									int main(int argc , char ** argv)
 									{
-										clean_fichier(argv[23]);
-										clean_fichier(argv[22]);
-										clean_fichier(argv[21]);
 										SEQUENCE D[21] ;
-										initialiser_tab_seq(D,argv);
+										initialiser_tab_seq(D,argv[1]);
 										afficher_tab(D);
-										LISTE *l = creer_liste_initiale(D,argv);
+										LISTE *l = creer_liste_initiale(D,"partie2-Liste_distances"
+																		,"partie2-Liste_seq_modif");
 										
 										
 										int T[10] , numero , taille ;
@@ -30,14 +28,15 @@
 											taille =get_num_autre(T,d,numero,l);
 											f[i] = creer_famille_initiale(taille);
 											remplir_famille(f[i],T,D);
-											ecrire_fich_fam(f[i],T,argv[23+i]);
-									
+											char *fileName = famille_fileName(i);
+											ecrire_fich_fam(f[i],T,fileName);
+
 											for(int j = 0 ; j < taille ; j++)
 											{
 												supp_numero_seq(l,T[j]);
 											}
-											ecrire_fichier_liste_fin(l,argv[22]);
-											i++;	
+											ecrire_fichier_liste_fin(l,"partie2-Liste_seq_modif");	
+											i++;				
 										}
 						
 										

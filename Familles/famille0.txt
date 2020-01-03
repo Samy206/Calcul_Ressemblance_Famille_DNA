@@ -6,6 +6,13 @@ la sequence 20 est : TCCTATGGAATCTTTTTA
 ]
 il y a 4 sequences.
 
+Les sequences apres alignement sont : 
+TTCTATGGAATCTTTTTA
+TTCTATGGAATCTCTTTA
+TTCTATGGAATTTTTTTA
+T-CCTATGGAATCTTTTTA
+
+
 
 
 La sequence consensus de cette famille est : TTCTATGGAAT.TTTTTA-

@@ -5,6 +5,12 @@ la sequence 19 est : CTTCTCGAGGAGCTATTTG
 ]
 il y a 3 sequences.
 
+Les sequences apres alignement sont : 
+C-TTCTCGGGAGCTATTTG
+CTGTCTCGGGAGCTATTTG
+CTTCTCGAGGAGCTATTTG
+
+
 
 
 La sequence consensus de cette famille est : CTTTCTCGGGAGCTATTTG

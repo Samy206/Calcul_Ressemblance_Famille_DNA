@@ -10,7 +10,8 @@
 							};
 							typedef struct famille FAMILLE;
 							
-							
+							char * famille_fileName(int i);
+							 
 							FAMILLE creer_famille_initiale(int nb);
 							
 							void remplir_famille(FAMILLE f , int T[] ,SEQUENCE D[]);

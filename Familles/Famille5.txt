@@ -4,6 +4,11 @@ la sequence  3 est : CTTCTGTCCCCTCTTTCA
 ]
 il y a 2 sequences.
 
+Les sequences apres alignement sont : 
+CTTC-ACCCCCCTCTTTCA
+CTTCTGTCCCCT-CTTTCA
+
+
 
 
 La sequence consensus de cette famille est : CTTC...CCCC..CTTTCA

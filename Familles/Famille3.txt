@@ -7,6 +7,14 @@ la sequence 17 est : ATTTGTAGAAGTACATTAA
 ]
 il y a 5 sequences.
 
+Les sequences apres alignement sont : 
+TTTTGTAGAAGTACATTAA
+CTTTGTAGAGGTACATTAA
+TTTTGTAGAAG-AACATTAA
+TTTTGTAGAAGTTCATTAA
+A-TTTGTAGAAGTACATTAA
+
+
 
 
 La sequence consensus de cette famille est : TTTTGTAGAAGTACATTAA-

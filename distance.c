@@ -121,10 +121,10 @@
 									
 									float pop_liste_place( LISTE *l , int place)
 									{
-										float valeur ;
+										float valeur = 0 ;
 										if(l == NULL)
 										{
-											printf("la liste n'a pas été crée\n");
+											printf("la liste n'a pas été créee\n");
 											exit(7);
 										}
 										
