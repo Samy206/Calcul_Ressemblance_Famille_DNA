@@ -50,27 +50,6 @@
 										}
 										free(l);
 									}
-										
-									
-									int get_indice(char *argv)
-									{
-										
-										int i ;
-										char* c;
-										c = malloc(2);
-										char s[2];
-										s[0] = argv[13];
-										s[1] = argv[14];
-										if(s[0] == '0')
-										{
-											i = ((int) s[1] ) - 48 ;
-										}
-										else
-										{
-											i = strtol(s,&c,10);
-										}
-										return i ;
-									}
 									
 									
 									int liste_vide(LISTE *l)

@@ -50,5 +50,6 @@ archive :
 clean : 
 	rm -f *.o	
 	rm partie3
+	rm -rf Familles
 	ls 
 	

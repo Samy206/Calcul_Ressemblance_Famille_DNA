@@ -18,9 +18,7 @@
 							typedef struct liste LISTE ;
 							
 							
-							LISTE * initialiser_liste();			
-							
-							int get_indice(char *argv);
+							LISTE * initialiser_liste();		
 							
 							int liste_vide(LISTE *l);
 							
